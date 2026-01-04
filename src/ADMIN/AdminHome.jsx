@@ -124,6 +124,9 @@ const AdminHome = () => {
                             <div className="w-full h-2 bg-gray-800 rounded-full overflow-hidden">
                                 <div className="w-1/3 h-full bg-green-500"></div>
                             </div>
+
+
+                            
                         </div>
                     </div>
                 </motion.div>
