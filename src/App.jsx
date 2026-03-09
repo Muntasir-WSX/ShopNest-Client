@@ -1,17 +1,11 @@
+import React from 'react';
 
-import './App.css'
-
-function App() {
- 
-
+const App = () => {
   return (
-    <>
-    
-      <h1>Vite + React</h1>
-    
-     
-    </>
-  )
-}
+    <div>
+      vite react app
+    </div>
+  );
+};
 
-export default App
+export default App;
