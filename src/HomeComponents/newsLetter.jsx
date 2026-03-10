@@ -19,7 +19,7 @@ const Newsletter = () => {
     };
 
     return (
-        <section className="py-20 bg-linear-to-l from-green-100 to-green-white">
+        <section className="py-20 rounded-3xl bg-linear-to-l from-green-100 to-green-white">
             <div className="max-w-3xl mx-auto px-6 text-center">
                 <div className="flex justify-center mb-6">
                     <FooterLogo></FooterLogo>

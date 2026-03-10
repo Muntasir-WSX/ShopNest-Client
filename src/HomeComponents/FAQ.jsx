@@ -13,11 +13,11 @@ const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState(0); 
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 rounded-3xl bg-[#FFC933]">
       <div className="max-w-3xl mx-auto px-6">
         {/* Header Section */}
         <div className="text-center mb-12">
-          <h4 className="text-green-600 font-bold uppercase tracking-widest text-sm mb-2">Support Center</h4>
+          <h4 className="text-Black font-bold uppercase tracking-widest text-sm mb-2">Support Center</h4>
           <h2 className="text-4xl font-extrabold text-gray-900">Need Help? We've Got You Covered</h2>
           <p className="text-gray-500 mt-4">Find quick answers to common questions about ShopNest services.</p>
         </div>
