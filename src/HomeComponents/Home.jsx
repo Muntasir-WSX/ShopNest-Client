@@ -5,6 +5,7 @@ import DiscountCard from './DiscountCard';
 import SummerDiscount from './SummerDiscount';
 import Weekly from './Weekly';
 import Testimonials from './Testimonials';
+import Blogs from './blogs';
 
 const Home = () => {
     return (
@@ -29,6 +30,7 @@ const Home = () => {
              {/* testimonials */}
              <Testimonials></Testimonials>
             {/* blogs  */}
+            <Blogs></Blogs>
             {/* faq */}
             {/* newsletter */}
                 
