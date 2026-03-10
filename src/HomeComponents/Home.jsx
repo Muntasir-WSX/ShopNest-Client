@@ -6,6 +6,8 @@ import SummerDiscount from './SummerDiscount';
 import Weekly from './Weekly';
 import Testimonials from './Testimonials';
 import Blogs from './blogs';
+import FAQ from './faq';
+import Newsletter from './newsLetter';
 
 const Home = () => {
     return (
@@ -32,7 +34,9 @@ const Home = () => {
             {/* blogs  */}
             <Blogs></Blogs>
             {/* faq */}
+            <FAQ></FAQ>
             {/* newsletter */}
+            <Newsletter></Newsletter>
                 
         </div>
     );
