@@ -1,12 +1,62 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc'; 
 import FooterLogo from '../Shared Components/Logo/FooterLogo';
 
+import toast from 'react-hot-toast'; 
+import useAuth from '../Context/UseAuth';
+
 const SignUp = () => {
+    const { createUser, updateUserProfile, googleLogin } = useAuth();
+    const navigate = useNavigate();
+    
+    // React Hook Form initialization
+    const { register, handleSubmit, formState: { errors } } = useForm();
+
+    const onSubmit = async (data) => {
+        const fullName = `${data.firstName} ${data.lastName}`;
+        const defaultPhoto = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+
+        try {
+           
+            await createUser(data.email, data.password);
+            
+          
+            await updateUserProfile(fullName, defaultPhoto);
+            
+            toast.success("Account created successfully!");
+            navigate('/'); 
+        } catch (error) {
+          
+            // toast.error(error.message.split('/')[1].replace(')', ''));
+
+
+            console.log("Error Code:", error.code);
+    console.log("Error Message:", error.message);
+   
+    if (error.code === 'auth/email-already-in-use') {
+        toast.error("This email is already in use!");
+    } else if (error.code === 'auth/weak-password') {
+        toast.error("Password must be at least 6 characters long.");
+    } else {
+        toast.error("Something went wrong, please try again.");
+    }
+        }
+    };
+
+    const handleGoogleSignUp = async () => {
+        try {
+            await googleLogin();
+            toast.success("Signed up with Google!");
+            navigate('/');
+        } catch (error) {
+            toast.error(error.message);
+        }
+    };
+
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4 font-sans">
-            {/* max-h increased to 680px for better visibility and overflow-y-auto as fallback */}
             <div className="max-w-4xl w-full bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row-reverse md:h-[680px]">
                 
                 {/* Right Side: Visual Content */}
@@ -29,7 +79,6 @@ const SignUp = () => {
 
                 {/* Left Side: Registration Form */}
                 <div className="md:w-7/12 p-6 md:p-8 flex flex-col justify-center overflow-y-auto">
-                    {/* Compact Logo */}
                     <div className="mb-4 transform scale-90 origin-left">
                        <FooterLogo />
                     </div>
@@ -39,63 +88,70 @@ const SignUp = () => {
                         <p className="text-gray-500 text-xs">Fill your information below to register.</p>
                     </div>
 
-                    <form className="space-y-3">
-                        {/* First Name & Last Name Grid */}
+                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                             <div>
                                 <label className="block text-[10px] font-bold text-gray-700 mb-1 ml-1">First Name *</label>
                                 <input 
+                                    {...register("firstName", { required: "First name is required" })}
                                     type="text" 
                                     placeholder="First Name"
                                     className="w-full px-4 py-2 rounded-xl border border-gray-200 bg-gray-50 outline-none focus:bg-white focus:border-green-600 focus:ring-1 focus:ring-green-600 transition text-sm"
-                                    required
                                 />
+                                {errors.firstName && <span className="text-[9px] text-red-500 ml-1">{errors.firstName.message}</span>}
                             </div>
                             <div>
                                 <label className="block text-[10px] font-bold text-gray-700 mb-1 ml-1">Last Name *</label>
                                 <input 
+                                    {...register("lastName", { required: "Last name is required" })}
                                     type="text" 
                                     placeholder="Last Name"
                                     className="w-full px-4 py-2 rounded-xl border border-gray-200 bg-gray-50 outline-none focus:bg-white focus:border-green-600 focus:ring-1 focus:ring-green-600 transition text-sm"
-                                    required
                                 />
+                                {errors.lastName && <span className="text-[9px] text-red-500 ml-1">{errors.lastName.message}</span>}
                             </div>
                         </div>
 
                         <div>
                             <label className="block text-[10px] font-bold text-gray-700 mb-1 ml-1">Email Address *</label>
                             <input 
+                                {...register("email", { 
+                                    required: "Email is required",
+                                    pattern: { value: /^\S+@\S+$/i, message: "Invalid email address" }
+                                })}
                                 type="email" 
                                 placeholder="Enter Email Address"
                                 className="w-full px-4 py-2 rounded-xl border border-gray-200 bg-gray-50 outline-none focus:bg-white focus:border-green-600 focus:ring-1 focus:ring-green-600 transition text-sm"
-                                required
                             />
+                            {errors.email && <span className="text-[9px] text-red-500 ml-1">{errors.email.message}</span>}
                         </div>
 
                         <div>
                             <label className="block text-[10px] font-bold text-gray-700 mb-1 ml-1">Password *</label>
                             <input 
+                                {...register("password", { 
+                                    required: "Password is required",
+                                    minLength: { value: 6, message: "Minimum 6 characters required" }
+                                })}
                                 type="password" 
                                 placeholder="Enter Password"
                                 className="w-full px-4 py-2 rounded-xl border border-gray-200 bg-gray-50 outline-none focus:bg-white focus:border-green-600 focus:ring-1 focus:ring-green-600 transition text-sm"
-                                required
                             />
+                            {errors.password && <span className="text-[9px] text-red-500 ml-1">{errors.password.message}</span>}
                         </div>
 
-                        {/* Terms & Conditions */}
                         <div className="flex items-start gap-2 text-[10px] py-1">
-                            <input type="checkbox" className="accent-green-600 w-3.5 h-3.5 mt-0.5 cursor-pointer rounded" required id="terms" />
+                            <input type="checkbox" {...register("terms", { required: true })} className="accent-green-600 w-3.5 h-3.5 mt-0.5 cursor-pointer rounded" id="terms" />
                             <label htmlFor="terms" className="text-gray-500 leading-tight cursor-pointer">
                                 I agree with <span className="text-green-700 font-bold hover:underline">Terms & Condition</span>
                             </label>
                         </div>
 
-                        <button className="w-full bg-[#059669] text-white py-2.5 rounded-xl font-bold hover:bg-[#047857] transition-all transform active:scale-95 shadow-lg">
+                        <button type="submit" className="w-full bg-[#059669] text-white py-2.5 rounded-xl font-bold hover:bg-[#047857] transition-all transform active:scale-95 shadow-lg text-sm">
                             Sign Up
                         </button>
                     </form>
 
-                    {/* Social Divider */}
                     <div className="relative my-4">
                         <div className="absolute inset-0 flex items-center">
                             <span className="w-full border-t border-gray-100"></span>
@@ -105,8 +161,10 @@ const SignUp = () => {
                         </div>
                     </div>
 
-                    {/* Google Sign In */}
-                    <button className="w-full border border-gray-200 py-2.5 rounded-xl flex items-center justify-center gap-2 hover:bg-gray-50 transition text-sm font-semibold text-gray-700 shadow-sm active:scale-[0.98]">
+                    <button 
+                        onClick={handleGoogleSignUp}
+                        className="w-full border border-gray-200 py-2.5 rounded-xl flex items-center justify-center gap-2 hover:bg-gray-50 transition text-sm font-semibold text-gray-700 shadow-sm active:scale-[0.98]"
+                    >
                         <FcGoogle className="text-lg" />
                         Sign Up With Google
                     </button>
