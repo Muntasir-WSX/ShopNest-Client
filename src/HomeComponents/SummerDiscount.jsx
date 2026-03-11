@@ -45,7 +45,7 @@ const SummerDiscount = () => {
             ))}
           </div>
           
-          <button className="bg-[#059669] text-white px-10 py-4 rounded-xl font-bold hover:bg-[#047857] transition-all transform hover:scale-105 active:scale-95 shadow-lg">
+          <button className="bg-[#059669] text-white px-10 py-4 rounded-xl font-bold hover:bg-[#047857] transition-all transform active:scale-95 shadow-lg">
             Shop Now →
           </button>
         </div>
