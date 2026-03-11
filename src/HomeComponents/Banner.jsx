@@ -13,7 +13,7 @@ const slides = [
 
 const Banner = () => {
   return (
-    <div className="w-full h-[500px]  overflow-hidden shadow-2xl relative group">
+    <div className="w-full h-[350px] md:h-[450px] lg:h-[500px] overflow-hidden shadow-2xl relative group">
       <Swiper
         modules={[Autoplay, Pagination, EffectFade]}
         effect="fade"
@@ -21,8 +21,8 @@ const Banner = () => {
         autoplay={{ delay: 5000, disableOnInteraction: false }}
         pagination={{ 
           clickable: true,
-          bulletClass: "swiper-pagination-bullet !w-3 !h-3 !bg-white !opacity-60",
-          bulletActiveClass: "!opacity-100 !bg-[#ffe70b] !w-8 !rounded-full transition-all"
+          bulletClass: "swiper-pagination-bullet !w-2 !h-2 md:!w-3 md:!h-3 !bg-white !opacity-60",
+          bulletActiveClass: "!opacity-100 !bg-[#ffe70b] !w-6 md:!w-8 !rounded-full transition-all"
         }}
         className="h-full w-full"
       >
@@ -32,35 +32,25 @@ const Banner = () => {
               className="h-full w-full bg-cover bg-center flex items-center relative"
               style={{ backgroundImage: `url(${slide.img})` }}
             >
-              <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/30 to-transparent" />
-              
-              <div className="relative z-10 px-16 max-w-2xl">
-                <span className="text-[#ffe70b] font-bold tracking-widest uppercase text-sm mb-2 block">100% Organic</span>
-                <h1 className="text-7xl font-extrabold text-white mb-6 leading-tight drop-shadow-lg">
+              <div className="absolute inset-0 bg-linear-to-r from-black/90 via-black/40 to-black/20 md:via-black/30 md:to-transparent" />
+              <div className="relative z-10 px-6 md:px-12 lg:px-16 max-w-full md:max-w-2xl text-left">
+                <span className="text-[#ffe70b] font-bold tracking-widest uppercase text-xs md:text-sm mb-2 block">
+                  100% Organic
+                </span>
+                <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-4 md:mb-6 leading-tight drop-shadow-lg">
                   {slide.title}
                 </h1>
-                <p className="text-xl text-gray-200 mb-8 font-light italic">{slide.desc}</p>
-                
-                <div className="flex items-center gap-6">
-                  <button className="px-8 py-3 bg-[#059669] hover:bg-[#047857] transition-all text-white rounded-lg font-bold flex items-center gap-2">
+                <p className="text-sm md:text-lg lg:text-xl text-gray-200 mb-6 md:mb-8 font-light italic line-clamp-2 md:line-clamp-none">
+                  {slide.desc}
+                </p>
+                <div className="flex flex-wrap items-center gap-4 md:gap-6">
+                  <button className="px-5 py-2 md:px-8 md:py-3 bg-[#059669] hover:bg-[#047857] transition-all text-white rounded-lg font-bold flex items-center gap-2 text-sm md:text-base">
                     Shop Now →
                   </button>
-                  <a href="#" className="text-white font-semibold underline hover:text-[#ffe70b]">View All Products</a>
+                  <a href="#" className="text-white font-semibold underline hover:text-[#ffe70b] text-xs md:text-sm">
+                    View All Products
+                  </a>
                 </div>
-
-                {/* rating */}
-                {/* <div className="mt-8 flex items-center gap-4 text-white">
-                  <div className="flex -space-x-3">
-                    {[1,2,3,4].map((i) => (
-                      <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-gray-300" />
-                    ))}
-                    <div className="w-10 h-10 rounded-full border-2 border-white bg-[#ffe70b] flex items-center justify-center font-bold text-gray-900">+</div>
-                  </div>
-                  <div>
-                    <p className="font-bold">4.8 Ratings+</p>
-                    <p className="text-sm text-gray-300">Trusted by 75k+ Customers</p>
-                  </div>
-                </div> */}
               </div>
             </div>
           </SwiperSlide>
