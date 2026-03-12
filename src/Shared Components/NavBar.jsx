@@ -1,221 +1,195 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { HiMenuAlt3, HiX, HiSearch, HiOutlineShoppingBag, HiOutlineUser } from 'react-icons/hi';
-import { IoLocationOutline } from "react-icons/io5";
+import { 
+  HiMenuAlt3, 
+  HiX, 
+  HiOutlineShoppingBag, 
+  HiOutlineUser, 
+  HiOutlineHeart, 
+  HiOutlineHome, 
+  HiOutlineShoppingCart, 
+  HiOutlineBookOpen, 
+  HiOutlineQuestionMarkCircle, 
+  HiOutlineInformationCircle,
+  HiOutlineUserCircle
+} from 'react-icons/hi';
 import NavLogo from './Logo/NavLogo';
 import useAuth from '../Context/UseAuth';
-import { LogOut } from 'lucide-react';
+import { LogOut, Settings } from 'lucide-react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, logOut } = useAuth();
-
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Shop', path: '/shop' },
-    { name: 'Fruits', path: '/fruits' },
-    { name: 'Vegetables', path: '/vegetables' },
-    { name: 'Beverages', path: '/beverages' },
-    { name: 'About Us', path: '/about' },
+    { name: 'Home', path: '/', icon: <HiOutlineHome /> },
+    { name: 'Shop', path: '/shop', icon: <HiOutlineShoppingCart /> },
+    { name: 'Blogs', path: '/blogs', icon: <HiOutlineBookOpen /> },
+    { name: 'FAQ', path: '/faq', icon: <HiOutlineQuestionMarkCircle /> },
+    { name: 'About Us', path: '/about', icon: <HiOutlineInformationCircle /> },
   ];
 
   return (
-    <nav className="w-full shadow-sm font-sans">
+    <nav className="w-full shadow-sm font-sans sticky top-0 z-100 bg-white">
       {/* 1. Top Bar */}
       <div className="bg-[#FBBF24] py-2 text-[10px] md:text-xs text-gray-800 font-medium">
         <div className="container mx-auto px-4 flex justify-between items-center">
-          <span className="hidden sm:inline">Call Us: +880 1960551472</span>
-          <span className="mx-auto sm:mx-0">
-            Sign up and GET 25% OFF for your first order. 
-            <Link to="/signup" className="underline font-bold ml-1">Sign up now</Link>
+          <span className="hidden sm:inline">
+            {user ? (
+              <span>Welcome back, <span className="font-bold underline">{user?.displayName?.split(' ')[0]}</span>!</span>
+            ) : (
+              <span>Call Us: +880 1960551472</span>
+            )}
+          </span>
+          <span className="mx-auto sm:mx-0 font-bold uppercase tracking-wider">
+            Free Shipping on orders over ৳500! 🚚
           </span>
         </div>
       </div>
 
       {/* 2. Main Header */}
-      <div className="bg-[#059669] py-3 md:py-4">
-        <div className="container mx-auto px-4 flex items-center justify-between gap-2 md:gap-4">
-          <NavLogo />
+      <div className="bg-[#059669] py-3">
+        <div className="container mx-auto px-4 flex items-center justify-between">
           
-          {/* Location - Hidden on Mobile */}
-          <div className="hidden lg:flex items-center gap-2 text-white bg-[#067352] px-3 py-2 rounded-lg border border-white/10">
-            <IoLocationOutline className="text-xl text-yellow-400" />
-            <div className="flex flex-col leading-tight">
-              <span className="text-[10px] opacity-80">Deliver to</span>
-              <span className="text-xs font-bold">CTG, Bangladesh</span>
-            </div>
-          </div>
+          {/* Logo Section */}
+          <NavLogo />
 
-          {/* Search Bar - Responsive */}
-          <div className="flex-1 max-w-md bg-white rounded-lg flex items-center overflow-hidden h-10 md:h-11">
-            <select className="hidden sm:block bg-gray-100 px-3 h-full text-xs border-r outline-none text-gray-600">
-              <option>All</option>
-              <option>Fruits</option>
-            </select>
-            <input 
-              type="text" 
-              placeholder="Search products..." 
-              className="w-full px-4 text-xs md:text-sm outline-none text-gray-700" 
-            />
-            <button className="bg-yellow-400 px-4 h-full text-gray-800 hover:bg-yellow-500 transition">
-              <HiSearch className="text-xl" />
-            </button>
-          </div>
-<div className="border-l border-white/20 pl-3 md:pl-5">
-  {user ? (
-    <div className="dropdown dropdown-end group">
-    
-      <div 
-        tabIndex={0} 
-        role="button" 
-        className="flex items-center gap-2 cursor-pointer outline-none focus:outline-none"
-      >
-        <div className="relative">
-          <img 
-            src={user?.photoURL || "https://i.ibb.co/mJR9Hxc/user-avatar.png"} 
-            alt="User" 
-            className="w-9 h-9 md:w-11 md:h-11 rounded-full border-2 border-yellow-400 object-cover shadow-lg transition-transform active:scale-95"
-          />
-          <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-[#059669] rounded-full"></div>
-        </div>
-        <div className="hidden xl:block text-left">
-           <p className="text-[10px] text-white/70 leading-none mb-0.5">Welcome,</p>
-           <p className="text-xs font-bold text-white truncate w-20">
-             {user?.displayName ? user.displayName.split(' ')[0] : 'User'}
-           </p>
-        </div>
-      </div>
-      <ul 
-        tabIndex={0} 
-        className="dropdown-content z-100 p-2 shadow-2xl bg-white rounded-2xl w-60 mt-4 border border-gray-100 animate-fadeIn list-none"
-      >
-        <div className="px-4 py-4 flex items-center gap-3 border-b border-gray-50 mb-2">
-            <img 
-              src={user?.photoURL || "https://i.ibb.co/mJR9Hxc/user-avatar.png"} 
-              className="w-10 h-10 rounded-full border border-gray-100" 
-              alt="Profile"
-            />
-            <div className="flex flex-col overflow-hidden text-left">
-              <span className="text-sm font-black text-gray-800 truncate">
-                {user?.displayName || 'User Name'}
-              </span>
-              <span className="text-[10px] text-gray-500 truncate w-36">
-                {user?.email}
-              </span>
-            </div>
-        </div>
-   
-        <li>
-          <Link to="/profile" className="flex items-center gap-3 p-3 text-gray-700 hover:bg-green-50 rounded-xl transition group/item">
-            <div className="p-2 bg-blue-50 text-blue-600 rounded-lg group-hover/item:bg-blue-600 group-hover/item:text-white transition-colors">
-              <HiOutlineUser className="text-lg" />
-            </div>
-            <span className="font-bold text-sm">My Profile</span>
-          </Link>
-        </li>
-        
-        <li>
-          <button 
-            onClick={logOut}
-            className="w-full flex items-center gap-3 p-3 text-red-600 hover:bg-red-50 rounded-xl transition group/logout mt-1"
-          >
-            <div className="p-2 bg-red-50 text-red-600 rounded-lg group-hover/logout:bg-red-600 group-hover/logout:text-white transition-colors">
-               <LogOut />
-            </div>
-            <span className="font-bold text-sm">Sign Out</span>
-          </button>
-        </li>
-      </ul>
-    </div>
-  ) : (
-    <Link to="/signin" className="flex items-center gap-2 group transition">
-       <div className="w-9 h-9 md:w-11 md:h-11 rounded-full bg-white/10 flex items-center justify-center border border-white/20 group-hover:bg-yellow-400 group-hover:text-gray-900 transition-all duration-300">
-          <HiOutlineUser className="text-xl" />
-       </div>
-       <div className="hidden lg:block text-left leading-tight">
-          <p className="text-[10px] text-white/70">Guest Account</p>
-          <p className="text-xs font-bold uppercase tracking-wider text-white">Login / Sign Up</p>
-       </div>
-    </Link>
-  )}
-</div>
-        </div>
-      </div>
+          {/* Desktop Navigation Links */}
+          <ul className="hidden lg:flex items-center gap-8 ml-10">
+            {navLinks.map(link => (
+              <li key={link.name}>
+                <NavLink 
+                  to={link.path}
+                  className={({ isActive }) => 
+                    `text-sm font-bold transition-all duration-300 flex items-center gap-1.5 ${
+                      isActive ? 'text-yellow-400' : 'text-white hover:text-yellow-300'
+                    }`
+                  }
+                >
+                  <span className="text-lg">{link.icon}</span>
+                  {link.name}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
 
-      {/* 3. Bottom Nav & Categories */}
-      <div className="bg-white border-b hidden md:block">
-        <div className="container mx-auto px-4 flex items-center justify-between py-0">
-          <div className="flex items-center gap-8">
-            <button className="bg-[#FBBF24] px-6 py-3 font-bold text-sm flex items-center gap-3 text-gray-900">
-              <HiMenuAlt3 className="text-xl" /> Browse All Categories
-            </button>
+          {/* Actions: Wishlist, Cart, User */}
+          <div className="flex items-center gap-3 md:gap-6 border-l border-white/20 pl-4 md:pl-6">
             
-            <ul className="flex items-center gap-6">
-              {navLinks.map(link => (
-                <li key={link.name}>
-                  <NavLink 
-                    to={link.path}
-                    className={({ isActive }) => 
-                      `text-sm font-semibold transition-colors py-4 inline-block border-b-2 ${
-                        isActive ? 'text-[#059669] border-[#059669]' : 'text-gray-600 border-transparent hover:text-[#059669]'
-                      }`
-                    }
-                  >
-                    {link.name}
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
+            {/* Wishlist */}
+            <Link to="/wishlist" className="relative text-white hover:text-yellow-400 transition group">
+              <HiOutlineHeart className="text-2xl" />
+              <span className="absolute -top-2 -right-2 bg-yellow-400 text-gray-900 text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+            </Link>
+
+            {/* Cart */}
+            <Link to="/cart" className="relative text-white hover:text-yellow-400 transition group">
+              <HiOutlineShoppingBag className="text-2xl" />
+              <span className="absolute -top-2 -right-2 bg-yellow-400 text-gray-900 text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+            </Link>
+
+            {/* Profile Dropdown */}
+            {user ? (
+              <div className="dropdown dropdown-end">
+                <div tabIndex={0} role="button" className="flex items-center gap-2 outline-none cursor-pointer">
+                  <div className="relative">
+                    <img 
+                      src={user?.photoURL || "https://i.ibb.co/mJR9Hxc/user-avatar.png"} 
+                      className="w-9 h-9 md:w-10 md:h-10 rounded-full border-2 border-yellow-400 object-cover shadow-md"
+                      alt="User"
+                    />
+                    <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-[#059669] rounded-full"></div>
+                  </div>
+                </div>
+                <ul tabIndex={0} className="dropdown-content z-110 p-2 shadow-2xl bg-white rounded-2xl w-60 mt-4 border border-gray-100 list-none text-gray-800 animate-in fade-in slide-in-from-top-2 duration-200">
+                  <li className="px-4 py-4 border-b border-gray-50 mb-2 bg-gray-50/50 rounded-t-xl">
+                    <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1">Signed in as</p>
+                    <p className="text-sm font-black text-gray-800 truncate">{user?.displayName || 'User'}</p>
+                    <p className="text-[10px] text-gray-500 truncate">{user?.email}</p>
+                  </li>
+                  
+                  <li>
+                    <Link to="/profile" className="flex items-center gap-3 p-3 hover:bg-green-50 rounded-xl text-sm font-bold text-gray-700 transition group/item">
+                      <HiOutlineUserCircle className="text-xl text-gray-400 group-hover/item:text-[#059669]" />
+                      <span>My Profile</span>
+                    </Link>
+                  </li>
+
+                  <li className="border-t border-gray-50 mt-1 pt-1">
+                    <button 
+                      onClick={logOut} 
+                      className="w-full flex items-center gap-3 p-3 text-red-600 hover:bg-red-50 rounded-xl text-sm font-bold transition group/logout"
+                    >
+                      <LogOut size={18} className="transition-transform group-hover/logout:-translate-x-1" />
+                      <span>Sign Out</span>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              <Link to="/signin" className="text-white hover:text-yellow-400 transition group flex flex-col items-center">
+                <HiOutlineUser className="text-2xl" />
+                <span className="text-[8px] uppercase font-bold hidden md:block">Login</span>
+              </Link>
+            )}
+
+            {/* Mobile Menu Toggle */}
+            <button className="lg:hidden text-white text-2xl active:scale-90 transition-transform" onClick={() => setIsOpen(true)}>
+              <HiMenuAlt3 />
+            </button>
           </div>
         </div>
-      </div>
-
-      {/* Mobile Bottom Navigation (Floating style for handheld) */}
-      <div className="md:hidden fixed bottom-0 left-0 w-full bg-white border-t flex justify-around py-3 z-[100] shadow-[0_-2px_10px_rgba(0,0,0,0.1)]">
-         <NavLink to="/" className="flex flex-col items-center text-gray-400">
-            <HiMenuAlt3 className="text-xl" />
-            <span className="text-[10px]">Home</span>
-         </NavLink>
-         <div className="flex flex-col items-center text-gray-400" onClick={() => setIsOpen(!isOpen)}>
-            <HiSearch className="text-xl" />
-            <span className="text-[10px]">Menu</span>
-         </div>
-         <Link to="/cart" className="relative flex flex-col items-center text-gray-400">
-            <HiOutlineShoppingBag className="text-xl" />
-            <span className="text-[10px]">Cart</span>
-            <span className="absolute -top-1 right-0 bg-green-600 text-white text-[8px] w-3 h-3 rounded-full flex items-center justify-center">0</span>
-         </Link>
-         <Link to={user ? "/profile" : "/signin"} className="flex flex-col items-center text-gray-400">
-            {user ? (
-               <img src={user?.photoURL} className="w-5 h-5 rounded-full border border-green-600" />
-            ) : (
-               <HiOutlineUser className="text-xl" />
-            )}
-            <span className="text-[10px]">{user ? 'Me' : 'Account'}</span>
-         </Link>
       </div>
 
       {/* Mobile Drawer Overlay */}
-      <div className={`fixed inset-0 bg-black/50 z-[101] transition-opacity duration-300 md:hidden ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`} onClick={() => setIsOpen(false)}>
-         <div className={`bg-white w-72 h-full shadow-2xl transition-transform duration-300 flex flex-col ${isOpen ? 'translate-x-0' : '-translate-x-full'}`} onClick={e => e.stopPropagation()}>
-            <div className="p-5 bg-[#059669] text-white flex justify-between items-center">
-               <NavLogo />
-               <HiX className="text-2xl cursor-pointer" onClick={() => setIsOpen(false)} />
+      <div className={`fixed inset-0 bg-black/60 z-101 transition-opacity duration-300 lg:hidden ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={() => setIsOpen(false)}>
+        <div className={`bg-white w-72 h-full shadow-2xl transition-transform duration-300 flex flex-col ${isOpen ? 'translate-x-0' : '-translate-x-full'}`} onClick={e => e.stopPropagation()}>
+          <div className="p-5 bg-[#059669] text-white flex justify-between items-center">
+            <NavLogo />
+            <div className="p-2 hover:bg-white/10 rounded-full cursor-pointer transition" onClick={() => setIsOpen(false)}>
+              <HiX className="text-2xl" />
             </div>
-            <div className="p-4 space-y-2 overflow-y-auto">
-               <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-4">Main Menu</p>
-               {navLinks.map(link => (
-                  <NavLink 
-                     key={link.name} 
-                     to={link.path} 
-                     onClick={() => setIsOpen(false)}
-                     className="block p-3 rounded-lg text-gray-700 font-semibold hover:bg-green-50 hover:text-green-700 transition"
-                  >
-                     {link.name}
-                  </NavLink>
-               ))}
-            </div>
-         </div>
+          </div>
+          
+          <div className="p-4 flex flex-col gap-2 overflow-y-auto">
+            <p className="px-3 text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Menu</p>
+            {navLinks.map(link => (
+              <NavLink 
+                key={link.name} 
+                to={link.path} 
+                onClick={() => setIsOpen(false)}
+                className={({ isActive }) => 
+                  `flex items-center gap-4 p-3.5 rounded-xl font-bold text-sm transition-all ${
+                    isActive ? 'bg-green-50 text-[#059669] shadow-sm' : 'text-gray-700 hover:bg-gray-50'
+                  }`
+                }
+              >
+                <span className="text-xl opacity-70">{link.icon}</span>
+                {link.name}
+              </NavLink>
+            ))}
+          </div>
+
+          <div className="mt-auto p-4 border-t border-gray-100 bg-gray-50">
+            {!user ? (
+               <Link 
+                to="/signin" 
+                onClick={() => setIsOpen(false)}
+                className="flex items-center justify-center gap-2 w-full py-3 bg-[#059669] text-white rounded-xl font-bold shadow-lg"
+               >
+                 <HiOutlineUser className="text-lg" />
+                 Login / Register
+               </Link>
+            ) : (
+              <button 
+                onClick={() => { logOut(); setIsOpen(false); }}
+                className="flex items-center justify-center gap-2 w-full py-3 bg-red-50 text-red-600 rounded-xl font-bold border border-red-100"
+              >
+                <LogOut size={18} />
+                Logout
+              </button>
+            )}
+          </div>
+        </div>
       </div>
     </nav>
   );
