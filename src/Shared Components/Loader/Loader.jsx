@@ -2,7 +2,7 @@ import React from 'react';
 
 const Loader = () => {
     return (
-        <div className="fixed inset-0 bg-white/80 backdrop-blur-sm z-[999] flex flex-col items-center justify-center">
+        <div className="fixed inset-0 bg-white/80 backdrop-blur-sm z-999 flex flex-col items-center justify-center">
             <div className="relative flex flex-col items-center">
                 
                 {/* animated Logo Icon Container */}
