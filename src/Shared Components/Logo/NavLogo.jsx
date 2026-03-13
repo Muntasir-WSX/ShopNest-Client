@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const NavLogo = () => {
     
     const svgLogo = (
-        <svg width="200" height="90" viewBox="0 0 500 350" xmlns="http://www.w3.org/2000/svg">
+        <svg width="120" height="70" viewBox="0 0 500 350" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <linearGradient id="yellowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop offset="0%" style={{ stopColor: '#FBBF24', stopOpacity: 1 }} />
@@ -28,7 +28,7 @@ const NavLogo = () => {
     );
 
     return (
-        <Link to="/" className="inline-block p-2">
+        <Link to="/" className="flex items-center gap-2">
             {svgLogo}
         </Link>
     );
