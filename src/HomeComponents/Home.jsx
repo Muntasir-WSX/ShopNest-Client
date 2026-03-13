@@ -18,12 +18,13 @@ const Home = () => {
             <Categories></Categories>
             {/* discount 2 card */}
             <DiscountCard></DiscountCard>
-            {/* products */}
+            {/* featured products */}
             {/* need to come from backend */}
 
             {/* summer discount (timer) */}
 
             <SummerDiscount></SummerDiscount>
+            
            
             {/* offers */}
             {/* Weekly Deals */}
