@@ -1,48 +1,34 @@
-import React from 'react';
-import Banner from './Banner';
-import Categories from './Categories';
-import DiscountCard from './DiscountCard';
-import SummerDiscount from './SummerDiscount';
-import Weekly from './Weekly';
-import Testimonials from './Testimonials';
-import Blogs from './blogs';
-import FAQ from './faq';
-import Newsletter from './newsLetter';
-import FeaturedProduct from './featuredProduct';
+import React, { Suspense, lazy } from 'react';
+import Loader from '../Shared Components/Loader/Loader';
 
+const Banner = lazy(() => import('./Banner'));
+const Categories = lazy(() => import('./Categories'));
+const DiscountCard = lazy(() => import('./DiscountCard'));
+const FeaturedProduct = lazy(() => import('./featuredProduct'));
+const SummerDiscount = lazy(() => import('./SummerDiscount'));
+const Weekly = lazy(() => import('./Weekly'));
+const Testimonials = lazy(() => import('./Testimonials'));
+const Blogs = lazy(() => import('./blogs'));
+const FAQ = lazy(() => import('./faq'));
+const Newsletter = lazy(() => import('./newsLetter'));
 
 const Home = () => {
     return (
-        <div>
-            {/* banner */}
-            <Banner></Banner>
-            {/* Categories Section */}
-            <Categories></Categories>
-            {/* discount 2 card */}
-            <DiscountCard></DiscountCard>
-            {/* featured products */}
-           <FeaturedProduct></FeaturedProduct>
-            {/* need to come from backend */}
-
-            {/* summer discount (timer) */}
-
-            <SummerDiscount></SummerDiscount>
-            
-           
-            {/* offers */}
-            {/* Weekly Deals */}
-            <Weekly></Weekly>
-            {/* best selleing products */}
-             {/* testimonials */}
-             <Testimonials></Testimonials>
-            {/* blogs  */}
-            <Blogs></Blogs>
-            {/* faq */}
-            <FAQ></FAQ>
-            {/* newsletter */}
-            <Newsletter></Newsletter>
-                
-        </div>
+        
+        <Suspense fallback={<Loader />}>
+            <div>
+                <Banner />
+                <Categories />
+                <DiscountCard />
+                <FeaturedProduct />
+                <SummerDiscount />
+                <Weekly />
+                <Testimonials />
+                <Blogs />
+                <FAQ />
+                <Newsletter />
+            </div>
+        </Suspense>
     );
 };
 

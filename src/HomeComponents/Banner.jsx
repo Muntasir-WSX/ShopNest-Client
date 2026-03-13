@@ -4,6 +4,7 @@ import { Autoplay, Pagination, EffectFade } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
+import { Link } from 'react-router';
 
 const slides = [
   { id: 1, title: "Fresh Vegetables", img: "https://res.cloudinary.com/dnk0bvpym/image/upload/v1773090765/carousole1_b5n5oc.jpg", desc: "Farm-fresh greens at your doorstep." },
@@ -44,12 +45,12 @@ const Banner = () => {
                   {slide.desc}
                 </p>
                 <div className="flex flex-wrap items-center gap-4 md:gap-6">
-                  <button className="px-5 py-2 md:px-8 md:py-3 bg-[#059669] hover:bg-[#047857] transition-all text-white rounded-lg font-bold flex items-center gap-2 text-sm md:text-base">
+                  <Link to="shop" className="px-5 py-2 md:px-8 md:py-3 bg-[#059669] hover:bg-[#047857] transition-all text-white rounded-lg font-bold flex items-center gap-2 text-sm md:text-base">
                     Shop Now →
-                  </button>
-                  <a href="#" className="text-white font-semibold underline hover:text-[#ffe70b] text-xs md:text-sm">
+                  </Link>
+                  <Link to="shop" className="text-white font-semibold underline hover:text-[#ffe70b] text-xs md:text-sm">
                     View All Products
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

@@ -3,48 +3,51 @@ import MainLayouts from "../Layouts/MainLayouts";
 import Home from "../HomeComponents/Home";
 import Signin from "../AuthPages/Signin";
 import SignUp from "../AuthPages/SignUp";
-import ShopMain from "../OtherPages/ShopMain/ShopMain";
 import AboutUs from "../OtherPages/AboutUs/AboutUs";
 import BlogsMain from "../OtherPages/BlogsMain/BlogsMain";
 import FAQMain from "../OtherPages/FAQMain/FAQMain";
 import ShopLayout from "../OtherPages/ShopMain/Shoplayout";
-
+import ErrorPage from "../Shared Components/Error/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayouts />, 
+    element: <MainLayouts />,
+    errorElement: <ErrorPage />,
     children: [
       {
-        path: "/",
-        element: <Home></Home>
+        index: true, 
+        element: <Home />
       },
       {
-        path:"/shop",
-        element:<ShopLayout></ShopLayout>
+        path: "shop",
+        element: <ShopLayout />
       },
       {
-        path:"/blogs",
-        element:<BlogsMain></BlogsMain>
+        path: "blogs",
+        element: <BlogsMain />
       },
       {
-        path:"/faq",
-        element:<FAQMain></FAQMain>
+        path: "faq",
+        element: <FAQMain />
       },
       {
-        path:"/about",
-        element:<AboutUs></AboutUs>
+        path: "about",
+        element: <AboutUs />
       },
-    
     ],
   },
   {
-    path: "signin",
-    element: <Signin></Signin>
+    path: "/signin",
+    element: <Signin />
   },
   {
-    path: "signup",
-    element: <SignUp></SignUp>
+    path: "/signup",
+    element: <SignUp />
+  },
+  {
+    path: "*", 
+    element: <ErrorPage />
   }
 ]);
 
