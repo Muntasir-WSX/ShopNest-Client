@@ -8,6 +8,8 @@ import Testimonials from './Testimonials';
 import Blogs from './blogs';
 import FAQ from './faq';
 import Newsletter from './newsLetter';
+import FeaturedProduct from './featuredProduct';
+
 
 const Home = () => {
     return (
@@ -19,6 +21,7 @@ const Home = () => {
             {/* discount 2 card */}
             <DiscountCard></DiscountCard>
             {/* featured products */}
+           <FeaturedProduct></FeaturedProduct>
             {/* need to come from backend */}
 
             {/* summer discount (timer) */}

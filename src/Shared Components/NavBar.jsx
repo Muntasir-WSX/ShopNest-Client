@@ -31,7 +31,7 @@ const Navbar = () => {
   return (
     <nav className="w-full shadow-sm font-sans sticky top-0 z-100 bg-white">
       {/* 1. Top Bar */}
-      <div className="bg-[#FBBF24] py-2 text-[10px] md:text-xs text-gray-800 font-medium">
+      <div className="bg-[#FBBF24] py-1 text-[10px] md:text-xs text-gray-800 font-medium">
         <div className="container mx-auto px-4 flex justify-between items-center">
           <span className="hidden sm:inline">
             {user ? (
@@ -47,7 +47,7 @@ const Navbar = () => {
       </div>
 
       {/* 2. Main Header */}
-      <div className="bg-[#059669] py-3">
+      <div className="bg-[#059669] py-1.5 md:py-2">
         <div className="container mx-auto px-4 flex items-center justify-between">
           
           {/* Logo Section */}
