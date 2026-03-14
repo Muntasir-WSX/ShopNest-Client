@@ -10,6 +10,7 @@ import ErrorPage from "../Shared Components/Error/ErrorPage";
 import AboutUs from "../OtherPages/AboutUs/AboutUs";
 import BlogsDetails from "../OtherPages/BlogsMain/BlogsDetails";
 import PrivateRoutes from "../Routes/PrivateRoutes";
+import ShopDetails from "../OtherPages/ShopMain/ShopDetails";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "shop",
         element: <ShopLayout />
+      },
+      {
+          path:"/shopdetails/:id",
+          element:<ShopDetails></ShopDetails>
       },
       {
         path: "blogs",

@@ -51,9 +51,8 @@ const ProductCard = ({ product }) => {
 
                 {/* Action Buttons */}
                 <div className="flex flex-col gap-2">
-                    {/* View Details Button */}
                     <Link 
-                        to={`/product/${_id}`}
+                        to={`/shopdetails/${_id}`}
                         className="w-full py-2 bg-gray-100 text-gray-700 hover:bg-gray-200 text-[11px] font-bold rounded-lg flex items-center justify-center transition-all duration-300 uppercase tracking-widest"
                     >
                         View Details
