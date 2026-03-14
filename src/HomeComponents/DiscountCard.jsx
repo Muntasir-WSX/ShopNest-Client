@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const DiscountCard = () => {
   const cards = [
@@ -28,9 +29,9 @@ const DiscountCard = () => {
             </span>
             <h2 className="text-3xl font-extrabold text-gray-900 mt-4 mb-2">{card.title}</h2>
             <p className="text-gray-600 mb-6">{card.desc}</p>
-            <button className="bg-[#059669] text-white px-6 py-2 rounded-lg font-semibold hover:bg-[#047857] transition-all flex items-center gap-2">
+            <Link to="shop" className="bg-[#059669] text-white px-6 py-2 rounded-lg font-semibold hover:bg-[#047857] transition-all flex items-center gap-2">
               Shop Now →
-            </button>
+            </Link>
           </div>
           <div className="w-40 h-40">
             <img src={card.img} alt="product" className="w-full h-full object-cover rounded-full shadow-lg" />

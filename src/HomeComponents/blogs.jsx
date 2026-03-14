@@ -19,7 +19,7 @@ const Blogs = () => {
                     <p className="text-green-600 font-bold uppercase tracking-widest text-sm">News & Blogs</p>
                     <h2 className="text-4xl font-extrabold text-gray-900 mt-2">Our Latest News & Blogs</h2>
                 </div>
-                <Link to="/blogs" className="bg-[#059669] text-white px-10 py-4 rounded-xl font-bold hover:bg-[#047857] transition-all transform active:scale-95 shadow-lg">
+                <Link to="/blogs" className="bg-[#059669] text-white px-6 py-2 rounded-lg font-semibold hover:bg-[#047857] transition-all flex items-center gap-2">
                     View All →
                 </Link>
             </div>
@@ -38,7 +38,11 @@ const Blogs = () => {
                                 <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
                                 <span>{blog.date}</span>
                             </div>
-                            <button className="text-green-600 font-bold hover:underline">Read More</button>
+                           <Link to={`/blogsDetails/${blog._id}`} className="mt-auto">
+                                <button className="text-green-600 font-bold hover:underline">
+                                    Read More
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 ))}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router';
 
 const SummerDiscount = () => {
   const [timeLeft, setTimeLeft] = useState({ days: 4, hours: 14, minutes: 48, seconds: 18 });
@@ -45,9 +46,9 @@ const SummerDiscount = () => {
             ))}
           </div>
           
-          <button className="bg-[#059669] text-white px-10 py-4 rounded-xl font-bold hover:bg-[#047857] transition-all transform active:scale-95 shadow-lg">
+          <Link to="shop" className="bg-[#059669] text-white px-10 py-4 rounded-xl font-bold hover:bg-[#047857] transition-all transform active:scale-95 shadow-lg">
             Shop Now →
-          </button>
+          </Link>
         </div>
         <div className="hidden md:block w-64 h-[400px] rounded-3xl overflow-hidden shadow-2xl">
           <img src="https://res.cloudinary.com/dnk0bvpym/image/upload/v1773162539/women_2_xlzyab.jpg" className="w-full h-full object-cover" />

@@ -31,7 +31,7 @@ const FeaturedProduct = () => {
                     </div>
                     <Link 
                         to="/shop" 
-                        className="flex items-center gap-2 bg-[#059669] text-white px-6 py-3 rounded-full font-bold text-sm hover:bg-green-700 transition-all shadow-lg shadow-green-200"
+                        className="bg-[#059669] text-white px-6 py-2 rounded-lg font-semibold hover:bg-[#047857] transition-all flex items-center gap-2"
                     >
                         View All Products <HiOutlineArrowRight />
                     </Link>

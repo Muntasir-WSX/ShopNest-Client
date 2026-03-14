@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useAxiosSecure from '../../Hooks/useAxiosSecure'; 
 import BlogsBanner from './BlogsBanner';
 import Loader from '../../Shared Components/Loader/Loader';
+import { Link } from 'react-router';
 
 
 const BlogsMain = () => {
@@ -50,7 +51,11 @@ const BlogsMain = () => {
                                         <p className="font-bold text-gray-800">{blog.author}</p>
                                         <p>{blog.date}</p>
                                     </div>
-                                    <button className="text-green-600 font-bold hover:underline transition-all">Read More →</button>
+                                     <Link to={`/blogsDetails/${blog._id}`} className="mt-auto">
+                                <button className="text-green-600 font-bold hover:underline">
+                                    Read More
+                                </button>
+                            </Link>
                                 </div>
                             </div>
                         </div>

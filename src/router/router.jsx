@@ -3,12 +3,12 @@ import MainLayouts from "../Layouts/MainLayouts";
 import Home from "../HomeComponents/Home";
 import Signin from "../AuthPages/Signin";
 import SignUp from "../AuthPages/SignUp";
-
 import BlogsMain from "../OtherPages/BlogsMain/BlogsMain";
 import FAQMain from "../OtherPages/FAQMain/FAQMain";
 import ShopLayout from "../OtherPages/ShopMain/Shoplayout";
 import ErrorPage from "../Shared Components/Error/ErrorPage";
 import AboutUs from "../OtherPages/AboutUs/AboutUs";
+import BlogsDetails from "../OtherPages/BlogsMain/BlogsDetails";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "blogs",
         element: <BlogsMain />
+      },
+      {
+          path:"/blogsDetails/:id",
+          element: <BlogsDetails></BlogsDetails>
       },
       {
         path: "faq",
