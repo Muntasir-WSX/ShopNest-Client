@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { FcGoogle } from 'react-icons/fc'; 
@@ -10,8 +10,10 @@ import useAuth from '../Context/UseAuth';
 const Signin = () => {
     const { userLogin, googleLogin } = useAuth();
     const navigate = useNavigate();
-    
-    // React Hook Form initialization
+const location = useLocation();
+const from = location.state?.from?.pathname || "/";
+navigate(from, { replace: true });
+  
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = async (data) => {

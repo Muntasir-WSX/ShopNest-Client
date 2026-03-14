@@ -9,6 +9,7 @@ import ShopLayout from "../OtherPages/ShopMain/Shoplayout";
 import ErrorPage from "../Shared Components/Error/ErrorPage";
 import AboutUs from "../OtherPages/AboutUs/AboutUs";
 import BlogsDetails from "../OtherPages/BlogsMain/BlogsDetails";
+import PrivateRoutes from "../Routes/PrivateRoutes";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
       },
       {
           path:"/blogsDetails/:id",
-          element: <BlogsDetails></BlogsDetails>
+          element: <PrivateRoutes><BlogsDetails></BlogsDetails></PrivateRoutes> 
       },
       {
         path: "faq",
