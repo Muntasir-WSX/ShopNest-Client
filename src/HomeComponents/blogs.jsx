@@ -19,7 +19,7 @@ const Blogs = () => {
                     <p className="text-green-600 font-bold uppercase tracking-widest text-sm">News & Blogs</p>
                     <h2 className="text-4xl font-extrabold text-gray-900 mt-2">Our Latest News & Blogs</h2>
                 </div>
-                <Link to="/all-blogs" className="bg-[#059669] text-white px-10 py-4 rounded-xl font-bold hover:bg-[#047857] transition-all transform active:scale-95 shadow-lg">
+                <Link to="/blogs" className="bg-[#059669] text-white px-10 py-4 rounded-xl font-bold hover:bg-[#047857] transition-all transform active:scale-95 shadow-lg">
                     View All →
                 </Link>
             </div>

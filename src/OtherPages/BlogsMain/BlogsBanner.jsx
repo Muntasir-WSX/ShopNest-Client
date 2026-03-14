@@ -6,7 +6,7 @@ const BlogsBanner = () => {
             <img 
                 src="https://res.cloudinary.com/dnk0bvpym/image/upload/v1773162540/women1_jqzi1z.jpg" 
                 alt="Blogs Banner" 
-                className="w-full h-full object-cover object-center"
+                className="rounded-3xl shadow-xl w-full h-[500px] object-cover"
             />
             <div className="absolute inset-0 bg-black/80"></div>
             <div className="absolute inset-0 flex items-center px-8 md:px-16 lg:px-24">
@@ -14,9 +14,11 @@ const BlogsBanner = () => {
                     <span className="bg-[#059669] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest shadow-lg">
                         Our Latest Insights
                     </span>
+                    
                     <h1 className="text-4xl md:text-6xl font-extrabold mt-6 leading-tight">
                         Discover Expert Tips for a <span className="text-[#FBBF24]">Healthier Life</span>
                     </h1>
+                    
                     <p className="mt-6 text-lg text-gray-200 font-medium leading-relaxed">
                         Explore our curated collection of articles, news, and guides designed to help you make smarter grocery choices every day.
                     </p>

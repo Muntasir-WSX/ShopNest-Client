@@ -1,8 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import AboutUsBanner from './AboutUsBanner';
 import Newsletter from '../../HomeComponents/newsLetter';
+import Loader from '../../Shared Components/Loader/Loader';
 
 const AboutUs = () => {
+    const [isLoading, setIsLoading] = useState(true);
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 1000);
+        
+        return () => clearTimeout(timer);
+    }, []);
+
+    if (isLoading) {
+        return (
+            <div className="flex h-screen items-center justify-center">
+                <Loader />
+            </div>
+        );
+    }
     return (
         <div className="bg-white">
             <AboutUsBanner />
