@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import Loader from '../../Shared Components/Loader/Loader';
-import { IoCartOutline, IoHeartOutline, IoAdd, IoRemove } from "react-icons/io5";
+import { IoCartOutline, IoAdd, IoRemove } from "react-icons/io5";
 import ShopDetailsBanner from './ShopDetailsBanner';
 
 const ShopDetails = () => {

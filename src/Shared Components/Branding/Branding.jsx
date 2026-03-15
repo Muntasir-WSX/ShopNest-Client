@@ -30,7 +30,7 @@ const Branding = () => {
     ];
 
     return (
-        <section className="py-6 bg-white border-b border-gray-100">
+        <section className="py-6 rounded-2xl bg-[#fbbf24] border-b border-gray-100">
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {brandingData.map((item) => (
@@ -45,10 +45,10 @@ const Branding = () => {
                             
                             {/* Text Content */}
                             <div className="flex flex-col">
-                                <h3 className="text-sm md:text-base font-bold text-gray-800 leading-tight">
+                                <h3 className="text-sm md:text-base uppercase font-extrabold text-black leading-tight">
                                     {item.title}
                                 </h3>
-                                <p className="text-[11px] md:text-xs text-gray-500 font-medium">
+                                <p className="text-[11px] md:text-xs text-gray-800 font-medium">
                                     {item.subtitle}
                                 </p>
                             </div>
