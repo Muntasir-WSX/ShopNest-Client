@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { HiOutlineShoppingBag, HiOutlineHeart } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
+import { WishlistContext } from '../../Context/WishlistProvider';
+import toast from 'react-hot-toast';
 
 const ProductCard = ({ product }) => {
     const { _id, name, category, price, discount, img, stockStatus } = product;
     const discountedPrice = discount > 0 ? (price - (price * discount) / 100).toFixed(0) : price;
 
+    const { addToWishlist } = useContext(WishlistContext);
+    const handleAddToWishlist = (product) => {
+        addToWishlist(product);
+        toast.success(`${product.name} added to wishlist!`);
+    };
     return (
         <div className="group bg-white rounded-xl border border-gray-100 p-3 hover:border-[#059669]/30 hover:shadow-2xl hover:shadow-green-500/10 transition-all duration-300 relative">
             
@@ -18,7 +25,7 @@ const ProductCard = ({ product }) => {
                 )}
             </div>
             <div className="absolute top-4 right-4 z-10">
-                <button className="p-2 bg-white/80 backdrop-blur-sm rounded-full text-gray-400 hover:bg-red-50 hover:text-red-500 shadow-sm transition-all duration-300">
+                <button onClick={()=> handleAddToWishlist(product)} className="p-2 bg-white/80 backdrop-blur-sm rounded-full text-gray-400 hover:bg-red-50 hover:text-red-500 shadow-sm transition-all duration-300">
                     <HiOutlineHeart size={18} />
                 </button>
             </div>

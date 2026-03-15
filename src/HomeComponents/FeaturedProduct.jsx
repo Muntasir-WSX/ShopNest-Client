@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react'; // ১. useContext ইমপোর্ট করলাম
 import { useQuery } from '@tanstack/react-query';
-import { HiOutlineArrowRight, HiOutlineShoppingBag, HiOutlineHeart } from 'react-icons/hi';
+import {  HiOutlineShoppingBag, HiOutlineHeart } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import Loader from '../Shared Components/Loader/Loader';
+import { WishlistContext } from '../Context/WishlistProvider'; 
+import toast from 'react-hot-toast';
 
 const FeaturedProduct = () => {
     const axiosSecure = useAxiosSecure();
+    const { addToWishlist } = useContext(WishlistContext); 
+
     const { data: products = [], isLoading } = useQuery({
         queryKey: ['featured-products'],
         queryFn: async () => {
@@ -15,28 +19,20 @@ const FeaturedProduct = () => {
         }
     });
 
+
+    const handleAddToWishlist = (product) => {
+        addToWishlist(product);
+        toast.success(`${product.name} added to wishlist!`);
+    };
+
+
     if (isLoading) return <Loader />;
 
     return (
         <section className="py-16 bg-white">
             <div className="container mx-auto px-4">
-                {/* Header Section */}
-                <div className="flex justify-between items-end mb-10">
-                    <div>
-                        <span className="text-[#059669] font-bold text-sm uppercase tracking-widest">Products</span>
-                        <h2 className="text-3xl md:text-4xl font-black text-gray-800 mt-2">
-                            Featured <span className="text-[#059669]">Products</span>
-                        </h2>
-                    </div>
-                    <Link 
-                        to="/shop" 
-                        className="bg-[#059669] text-white px-6 py-2 rounded-lg font-semibold hover:bg-[#047857] transition-all flex items-center gap-2"
-                    >
-                        View All Products <HiOutlineArrowRight />
-                    </Link>
-                </div>
+                {/* ... Header Section একই থাকবে ... */}
 
-                {/* Products Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     {products.map((product) => {
                         const { _id, name, category, price, discount, img, stockStatus } = product;
@@ -52,18 +48,20 @@ const FeaturedProduct = () => {
                                         </span>
                                     )}
                                 </div>
+                                
+                                {/* Wishlist Button */}
                                 <div className="absolute top-4 right-4 z-10">
-                                    <button className="p-2 bg-white/80 backdrop-blur-sm rounded-full text-gray-400 hover:bg-red-50 hover:text-red-500 shadow-sm transition-all duration-300">
+                                    <button 
+                                        onClick={() => handleAddToWishlist(product)} 
+                                        className="p-2 bg-white/80 backdrop-blur-sm rounded-full text-gray-400 hover:bg-red-50 hover:text-red-500 shadow-sm transition-all duration-300"
+                                    >
                                         <HiOutlineHeart size={18} />
                                     </button>
                                 </div>
-
-                                {/* Image */}
                                 <Link to={`/product/${_id}`} className="block relative aspect-square overflow-hidden rounded-lg bg-gray-50 mb-4">
                                     <img src={img} alt={name} className="w-full h-full object-cover" />
                                 </Link>
 
-                                {/* Info */}
                                 <div className="px-1">
                                     <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">{category}</p>
                                     <h3 className="text-sm font-bold text-gray-800 mb-2 truncate group-hover:text-[#059669] transition-colors">
@@ -75,7 +73,6 @@ const FeaturedProduct = () => {
                                         {discount > 0 && <span className="text-[11px] text-gray-400 line-through">৳{price}</span>}
                                     </div>
 
-                                    {/* Buttons */}
                                     <div className="flex flex-col gap-2">
                                         <Link to={`/shopdetails/${_id}`} className="w-full py-2 bg-gray-100 text-gray-700 hover:bg-gray-200 text-[11px] font-bold rounded-lg flex items-center justify-center transition-all uppercase tracking-widest">
                                             View Details

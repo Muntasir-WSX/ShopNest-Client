@@ -45,12 +45,19 @@ const ShopDetails = () => {
 
                     {/* Right: Product Info */}
                     <div className="flex flex-col">
-                        <span className="text-[#059669] uppercase font-bold tracking-widest text-sm mb-2">{product.category}</span>
+                        <span className="text-[#059669] uppercase font-bold tracking-widest text-sm mb-2">
+        {product.category} | <span className="text-gray-500">{product.origin}</span>
+    </span>
                         <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">{product.name}</h1>
                         
                         <div className="flex items-center gap-4 mb-6">
                             <span className="text-3xl font-black text-[#059669]">৳{discountedPrice}</span>
                             <span className="text-xl text-gray-400 line-through">৳{product.price}</span>
+                            <span className="text-sm font-bold bg-gray-100 px-3 py-1 rounded-full text-gray-600">
+            {product.unit}
+        </span>
+                        
+                        
                         </div>
 
                         <p className="text-gray-600 mb-8 leading-relaxed">{product.desc}</p>
@@ -69,10 +76,6 @@ const ShopDetails = () => {
                             
                             <button className="bg-yellow-400 text-gray-900 px-8 py-4 rounded-xl font-bold hover:bg-yellow-500">
                                 Buy Now
-                            </button>
-
-                            <button className="p-4 border-2 border-gray-200 rounded-xl hover:text-red-500 hover:border-red-500">
-                                <IoHeartOutline className="text-2xl" />
                             </button>
                         </div>
                     </div>

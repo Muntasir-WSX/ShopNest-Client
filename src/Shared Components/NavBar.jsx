@@ -78,13 +78,11 @@ const Navbar = () => {
             {/* Wishlist */}
             <Link to="/wishlist" className="relative text-white hover:text-yellow-400 transition group">
               <HiOutlineHeart className="text-2xl" />
-              <span className="absolute -top-2 -right-2 bg-yellow-400 text-gray-900 text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
             </Link>
 
             {/* Cart */}
             <Link to="/cart" className="relative text-white hover:text-yellow-400 transition group">
               <HiOutlineShoppingBag className="text-2xl" />
-              <span className="absolute -top-2 -right-2 bg-yellow-400 text-gray-900 text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
             </Link>
 
             {/* Profile Dropdown */}

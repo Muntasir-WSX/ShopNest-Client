@@ -40,7 +40,7 @@ const ShopDetailsBanner = () => {
         </div>
         <div>
           <p className="text-[10px] font-black uppercase">Flash Deal</p>
-          <p className="text-lg font-black ">Save Up to 30%</p>
+          <p className="text-lg font-black ">Save Up to 20%</p>
         </div>
       </div>
     </div>
