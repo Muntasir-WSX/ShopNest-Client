@@ -14,7 +14,6 @@ const ShopDetails = () => {
     const [quantity, setQuantity] = useState(1);
     const axiosPublic = useAxiosPublic();
     
-    // কন্টেক্সট থেকে ফাংশনটি নিয়ে নিলাম
     const { addToCart } = useCart();
 
     useEffect(() => {
@@ -40,12 +39,11 @@ const ShopDetails = () => {
         const cartItem = {
             productId: product._id,
             name: product.name,
-            price: parseFloat(discountedPrice), // price নাম্বার ফরম্যাটে রাখা ভালো
+            price: parseFloat(discountedPrice), 
             image: product.img,
             quantity: quantity,
         };
 
-        // কন্টেক্সট ফাংশন কল
         await addToCart(cartItem);
     };
 

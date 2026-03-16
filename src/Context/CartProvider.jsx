@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 import useAxiosPublic from '../Hooks/useAxiosPublic';
-
+import toast from 'react-hot-toast';
 
 export const CartContext = createContext();
 
@@ -9,17 +9,20 @@ export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
 
     const addToCart = async (cartItem) => {
-        try {
-            const res = await axiosPublic.post('/carts', cartItem);
-            if (res.data.insertedId) {
-                alert("Product added to cart!");
-                return true;
-            }
-        } catch (err) {
-            console.error("Error adding to cart:", err);
-            return false;
+    try {
+        const res = await axiosPublic.post('/carts', cartItem);
+        if (res.data.insertedId) {
+            await axiosPublic.patch(`/products/update-stock/${cartItem.productId}`, {
+                orderQuantity: cartItem.quantity
+            })
+            toast.success("Added to cart & stock updated!"); 
+            return true;
         }
-    };
+    } catch (err) {
+        toast.error("Error adding to cart."); 
+        return false;
+    }
+};
 
     return (
         <CartContext.Provider value={{ addToCart, cart }}>
