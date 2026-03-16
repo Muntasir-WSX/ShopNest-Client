@@ -12,6 +12,7 @@ import BlogsDetails from "../OtherPages/BlogsMain/BlogsDetails";
 import PrivateRoutes from "../Routes/PrivateRoutes";
 import ShopDetails from "../OtherPages/ShopMain/ShopDetails";
 import Wishlist from "../OtherPages/ShopMain/Wishlist/Wishlist";
+import Cart from "../OtherPages/Cart/CartMain/Cart";
 
 const router = createBrowserRouter([
   {
@@ -36,7 +37,11 @@ const router = createBrowserRouter([
         element: <PrivateRoutes><Wishlist></Wishlist></PrivateRoutes>
       },
       {
-        path: "blogs",
+          path: "/cart",
+          element:<PrivateRoutes><Cart></Cart></PrivateRoutes>
+      },
+      {
+        path: "/blogs",
         element: <BlogsMain />
       },
       {
