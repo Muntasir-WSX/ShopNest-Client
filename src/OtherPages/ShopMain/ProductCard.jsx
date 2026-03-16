@@ -3,16 +3,31 @@ import { HiOutlineShoppingBag, HiOutlineHeart } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 import { WishlistContext } from '../../Context/WishlistProvider';
 import toast from 'react-hot-toast';
+import { useCart } from '../../Context/CartProvider';
 
 const ProductCard = ({ product }) => {
     const { _id, name, category, price, discount, img, stockStatus } = product;
     const discountedPrice = discount > 0 ? (price - (price * discount) / 100).toFixed(0) : price;
 
     const { addToWishlist } = useContext(WishlistContext);
+    const { addToCart } = useCart();
     const handleAddToWishlist = (product) => {
         addToWishlist(product);
         toast.success(`${product.name} added to wishlist!`);
     };
+        const handleAddToCart = async () => {
+        const cartItem = {
+            productId: _id,
+            name: name,
+            price: parseFloat(discountedPrice),
+            image: img,
+            quantity: 1, 
+        };
+
+        const success = await addToCart(cartItem);
+    };
+
+
     return (
         <div className="group bg-white rounded-xl border border-gray-100 p-3 hover:border-[#059669]/30 hover:shadow-2xl hover:shadow-green-500/10 transition-all duration-300 relative">
             
@@ -71,7 +86,7 @@ const ProductCard = ({ product }) => {
                             Sold Out
                         </button>
                     ) : (
-                        <button className="w-full py-2 bg-green-50 text-[#059669] hover:bg-[#059669] hover:text-white text-[11px] font-black rounded-lg flex items-center justify-center gap-2 border border-green-100 hover:border-[#059669] transition-all duration-300 uppercase tracking-widest">
+                        <button onClick={handleAddToCart} className="w-full py-2 bg-green-50 text-[#059669] hover:bg-[#059669] hover:text-white text-[11px] font-black rounded-lg flex items-center justify-center gap-2 border border-green-100 hover:border-[#059669] transition-all duration-300 uppercase tracking-widest">
                             <HiOutlineShoppingBag size={15} />
                             Add to Cart
                         </button>
