@@ -3,10 +3,29 @@ import { WishlistContext } from "../../../Context/WishlistProvider";
 import { IoCloseOutline, IoArrowBackOutline, IoArrowForwardOutline } from "react-icons/io5";
 import Branding from "../../../Shared Components/Branding/Branding";
 import Loader from "../../../Shared Components/Loader/Loader";
+import toast from "react-hot-toast";
+import { useCart } from "../../../Context/CartProvider";
 
 const Wishlist = () => {
  const context = useContext(WishlistContext) || {};
   const { wishlist = [], removeFromWishlist, currentPage, setCurrentPage, totalPages, loading } = context;
+const { addToCart } = useCart();
+
+const handleMoveToCart = async (item) => {
+    const cartItem = {
+      productId: item.productId, 
+      name: item.name,
+      price: parseFloat(item.price),
+      image: item.img,
+      quantity: 1, 
+    };
+
+    const success = await addToCart(cartItem);
+    if (success) {
+      removeFromWishlist(item._id);
+      toast.success(`${item.name} moved to cart!`);
+    }
+  };
 
 if (loading) {
     return (
@@ -67,7 +86,7 @@ if (loading) {
                         {item.stockStatus === "out-of-stock" ? (
                           <button disabled className="bg-gray-100 text-gray-400 px-6 py-2.5 rounded-lg font-bold cursor-not-allowed text-sm uppercase">Sold Out</button>
                         ) : (
-                          <button className="bg-[#059669] text-white px-6 py-2.5 rounded-lg font-bold hover:bg-[#047857] transition-all text-sm uppercase">Add to Cart</button>
+                          <button onClick={() =>handleMoveToCart(item)} className="bg-[#059669] text-white px-6 py-2.5 rounded-lg font-bold hover:bg-[#047857] transition-all text-sm uppercase">Add to Cart</button>
                         )}
                       </td>
                     </tr>

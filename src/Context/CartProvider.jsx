@@ -15,7 +15,6 @@ export const CartProvider = ({ children }) => {
             await axiosPublic.patch(`/products/update-stock/${cartItem.productId}`, {
                 orderQuantity: cartItem.quantity
             })
-            toast.success("Added to cart & stock updated!"); 
             return true;
         }
     } catch (err) {

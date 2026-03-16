@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { HiOutlineShoppingBag, HiOutlineHeart } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 import { WishlistContext } from '../../Context/WishlistProvider';
-import toast from 'react-hot-toast';
 import { useCart } from '../../Context/CartProvider';
 
 const ProductCard = ({ product }) => {
@@ -13,7 +12,7 @@ const ProductCard = ({ product }) => {
     const { addToCart } = useCart();
     const handleAddToWishlist = (product) => {
         addToWishlist(product);
-        toast.success(`${product.name} added to wishlist!`);
+        
     };
         const handleAddToCart = async () => {
         const cartItem = {
@@ -24,7 +23,7 @@ const ProductCard = ({ product }) => {
             quantity: 1, 
         };
 
-        const success = await addToCart(cartItem);
+     await addToCart(cartItem);
     };
 
 

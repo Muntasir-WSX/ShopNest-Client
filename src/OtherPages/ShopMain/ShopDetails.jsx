@@ -4,7 +4,6 @@ import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import Loader from '../../Shared Components/Loader/Loader';
 import { IoCartOutline, IoAdd, IoRemove } from "react-icons/io5";
 import ShopDetailsBanner from './ShopDetailsBanner';
-// নিশ্চিত করুন এই পাথটি সঠিক, প্রয়োজনে আপনার প্রজেক্ট অনুযায়ী পাথ ঠিক করুন
 import { useCart } from '../../Context/CartProvider'; 
 
 const ShopDetails = () => {
