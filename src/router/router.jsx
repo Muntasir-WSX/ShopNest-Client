@@ -13,6 +13,7 @@ import PrivateRoutes from "../Routes/PrivateRoutes";
 import ShopDetails from "../OtherPages/ShopMain/ShopDetails";
 import Wishlist from "../OtherPages/ShopMain/Wishlist/Wishlist";
 import Cart from "../OtherPages/Cart/CartMain/Cart";
+import CheckOutForm from "../OtherPages/Cart/CartMain/CheckOutForm";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path:"/wishlist",
         element: <PrivateRoutes><Wishlist></Wishlist></PrivateRoutes>
+      },
+      {
+          path:"checkoutform",
+          element:<PrivateRoutes><CheckOutForm></CheckOutForm></PrivateRoutes>
       },
       {
           path: "/cart",

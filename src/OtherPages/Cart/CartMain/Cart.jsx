@@ -146,10 +146,10 @@ const Cart = () => {
                             </div>
                         </div>
 
-                        <button className="w-full mt-10 py-4 bg-[#059669] text-white font-black rounded-xl hover:bg-[#047857] transition-all shadow-xl shadow-green-100 uppercase tracking-widest text-xs flex items-center justify-center gap-2 group">
-                            Proceed to Checkout
-                            <span className="group-hover:translate-x-1 transition-transform">→</span>
-                        </button>
+                       <Link to="/checkoutform" className="w-full mt-10 py-4 bg-[#059669] text-white px-6 rounded-lg font-semibold hover:bg-[#047857] transition-all flex items-center justify-center gap-2 group">
+    <span>Proceed to Checkout</span>
+    <span className="group-hover:translate-x-1 transition-transform">→</span>
+</Link>
 
                         <div className="mt-8 pt-6 border-t border-gray-100">
     <div className="flex flex-col items-center gap-3">
