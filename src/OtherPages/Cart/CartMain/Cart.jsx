@@ -151,9 +151,24 @@ const Cart = () => {
                             <span className="group-hover:translate-x-1 transition-transform">→</span>
                         </button>
 
-                        <div className="mt-6 flex items-center justify-center gap-4 grayscale opacity-50">
-                             <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/SSLCommerz_logo.png" alt="Payment Methods" className="h-6" />
-                        </div>
+                        <div className="mt-8 pt-6 border-t border-gray-100">
+    <div className="flex flex-col items-center gap-3">
+        <div className="flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-full border border-gray-100">
+            <svg className="w-4 h-4 text-[#059669]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+            <p className="text-[11px] font-bold text-gray-500 uppercase tracking-widest">
+                Secure Payment via <span className="text-[#059669]">SSLCOMMERZ</span>
+            </p>
+        </div>
+        <div className="flex items-center gap-3 opacity-60 grayscale hover:grayscale-0 transition-all cursor-default">
+             <span className="text-[10px] font-black text-blue-800 italic">VISA</span>
+             <span className="text-[10px] font-black text-red-600 italic">mastercard</span>
+             <span className="text-[10px] font-black text-orange-500">bkash</span>
+             <span className="text-[10px] font-black text-pink-600">Nagad</span>
+        </div>
+    </div>
+</div>
                     </div>
                 </div>
             </div>

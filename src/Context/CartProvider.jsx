@@ -27,35 +27,41 @@ export const CartProvider = ({ children }) => {
     useEffect(() => {
         fetchCart();
     }, [fetchCart]);
+
+
     const addToCart = async (product) => {
-        if (!user) return toast.error("Please login to add items!");
-
-        const cartItem = {
-            productId: product._id,
-            userEmail: user.email,
-            name: product.name,
-            price: product.price,
-            image: product.img,
-            quantity: 1,
-            unit: product.unit
-        };
-
-        try {
-         
-            const res = await axiosSecure.post('/carts', cartItem);
-            
-            if (res.data.insertedId || res.data.modifiedCount > 0) {
-             
-                await axiosSecure.patch(`/products/update-stock/${product._id}`, {
-                    orderQuantity: 1
-                });
-                toast.success(`${product.name} added to cart!`);
-                fetchCart();
-            }
-        } catch (error) {
-            toast.error(error.response?.data?.message || "Failed to add to cart");
-        }
+        if (!user|| !user.email) return toast.error("Please login to add items!");
+    
+        const currentProductId = product._id || product.productId;
+   if (!currentProductId) {
+        console.error("ID missing in product:", product);
+        return toast.error("Product ID not found!");
+    }
+       const cartItem = {
+        productId: currentProductId, 
+        userEmail: user.email,
+        name: product.name,
+        price: product.price,
+        image: product.image || product.img, 
+        quantity: product.quantity || 1, 
+        unit: product.unit || '1kg',
+        addedAt: new Date().toISOString(),
     };
+
+    try {
+        const res = await axiosSecure.post('/carts', cartItem);
+        if (res.data.insertedId || res.data.modifiedCount > 0) {
+            await axiosSecure.patch(`/products/update-stock/${currentProductId}`, {
+                orderQuantity: product.quantity || 1
+            });
+            
+            toast.success(`${product.name} added to cart!`);
+            fetchCart(); 
+        }
+    } catch (error) {
+        toast.error(error.response?.data?.message || "Failed to add to cart");
+    }
+};
 
     const updateQuantity = async (id, action, currentQty) => {
         if (action === 'decrease' && currentQty <= 1) return;
