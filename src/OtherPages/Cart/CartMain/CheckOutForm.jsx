@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useCart } from '../../../Context/CartProvider';
+import Branding from '../../../Shared Components/Branding/Branding';
+import Newsletter from '../../../HomeComponents/newsLetter';
 
 const CheckOutForm = () => {
     const { totalAmount, subTotal, shippingCharge } = useCart();
@@ -26,7 +28,7 @@ const CheckOutForm = () => {
     };
 
     return (
-        <div className="bg-gray-50 min-h-screen py-10 px-4 sm:px-10">
+        <div className="bg-gray-50 min-h-screen py-10 gap-2 px-4 sm:px-10">
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
                 
                 {/* Billing Details Form */}
@@ -140,7 +142,14 @@ const CheckOutForm = () => {
                         </button>
                     </div>
                 </div>
+              
             </div>
+             <div className='max-w-7xl mx-auto mt-10'>
+                                            <Branding></Branding>
+             </div>
+             <div className='max-w-7xl mx-auto mt-10'>
+                <Newsletter></Newsletter>
+             </div>
         </div>
     );
 };
