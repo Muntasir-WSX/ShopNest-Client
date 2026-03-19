@@ -23,10 +23,10 @@ const handleMoveToCart = async (item) => {
 
     const success = await addToCart(cartItem);
     if (success) {
-      const removed = await removeFromWishlist(item._id); 
-      if(removed) {
-        toast.success(`${item.name} moved to cart!`);
-      }
+      await removeFromWishlist(item._id);
+      toast.success(`${item.name} moved to cart!`);
+    } else {
+      toast.error("Could not move item to cart. Please try again.");
     }
   };
 

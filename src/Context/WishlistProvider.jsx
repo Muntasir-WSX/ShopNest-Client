@@ -77,17 +77,17 @@ const removeFromWishlist = async (id) => {
     try {
         const res = await axiosSecure.delete(`/wishlist/${id}`);
         if (res.data.deletedCount > 0) {
-            setWishlist(prev => prev.filter(item => item._id !== id));
-            setCount(prev => prev - 1);
+          
+            setWishlist((prev) => prev.filter((item) => item._id !== id));
+            setCount((prev) => prev - 1);
             if (wishlist.length === 1 && currentPage > 0) {
-                setCurrentPage(prev => prev - 1);
+                setCurrentPage((prev) => prev - 1);
             }
-            
-            return true; 
+            return true;
         }
+        return false;
     } catch (err) {
         console.error("Delete failed", err);
-        toast.error("Failed to remove item", { id: 'remove-error' });
         return false;
     }
 };
