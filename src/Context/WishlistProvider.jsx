@@ -73,22 +73,24 @@ export const WishlistProvider = ({ children }) => {
             }
         }
     };
-    const removeFromWishlist = async (id) => {
-        try {
-            const res = await axiosSecure.delete(`/wishlist/${id}`);
-            if (res.data.deletedCount > 0) {
-                if (wishlist.length === 1 && currentPage > 0) {
-                    setCurrentPage(prev => prev - 1);
-                } else {
-                    fetchWishlist(); 
-                }
-                
+const removeFromWishlist = async (id) => {
+    try {
+        const res = await axiosSecure.delete(`/wishlist/${id}`);
+        if (res.data.deletedCount > 0) {
+            setWishlist(prev => prev.filter(item => item._id !== id));
+            setCount(prev => prev - 1);
+            if (wishlist.length === 1 && currentPage > 0) {
+                setCurrentPage(prev => prev - 1);
             }
-        } catch (err) {
-            console.error("Delete failed", err);
-            toast.error("Failed to remove item", { id: 'remove-error' });
+            
+            return true; 
         }
-    };
+    } catch (err) {
+        console.error("Delete failed", err);
+        toast.error("Failed to remove item", { id: 'remove-error' });
+        return false;
+    }
+};
 
     const totalPages = Math.ceil(count / itemsPerPage);
 

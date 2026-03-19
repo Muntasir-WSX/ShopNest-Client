@@ -17,13 +17,16 @@ const handleMoveToCart = async (item) => {
       name: item.name,
       price: parseFloat(item.price),
       image: item.img,
-      quantity: 1, 
+      quantity: 1,
+      userEmail: item.userEmail 
     };
 
     const success = await addToCart(cartItem);
     if (success) {
-      removeFromWishlist(item._id);
-      toast.success(`${item.name} moved to cart!`);
+      const removed = await removeFromWishlist(item._id); 
+      if(removed) {
+        toast.success(`${item.name} moved to cart!`);
+      }
     }
   };
 
