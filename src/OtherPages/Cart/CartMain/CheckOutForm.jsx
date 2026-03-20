@@ -16,16 +16,41 @@ const CheckOutForm = () => {
             .catch((err) => console.error("Error loading areas:", err));
     }, []);
 
-    const onSubmit = (data) => {
-        const orderDetails = {
-            ...data,
-            district: "Chittagong",
-            totalAmount,
-            orderDate: new Date().toISOString()
-        };
-        console.log("Order Data Ready for SSLCOMMERZ:", orderDetails);
-        
+    const onSubmit = async (data) => {
+    const orderDetails = {
+        ...data,
+        district: "Chittagong",
+        totalAmount,
+        subTotal,
+        shippingCharge,
+        orderDate: new Date().toISOString(),
     };
+
+    // ১. সার্ভারে অর্ডার রিকোয়েস্ট পাঠানো
+    try {
+        const response = await fetch('http://localhost:5000/order', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(orderDetails)
+        });
+
+        const result = await response.json();
+
+        if (result?.url) {
+            window.location.replace(result.url);
+        } else {
+            alert("Something went wrong with the payment gateway.");
+        }
+    } catch (error) {
+        console.error("Order error:", error);
+        alert("Server error. Please try again.");
+    }
+};
+
+
+    
 
     return (
         <div className="bg-gray-50 min-h-screen py-10 gap-2 px-4 sm:px-10">

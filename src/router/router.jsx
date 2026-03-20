@@ -14,6 +14,7 @@ import ShopDetails from "../OtherPages/ShopMain/ShopDetails";
 import Wishlist from "../OtherPages/ShopMain/Wishlist/Wishlist";
 import Cart from "../OtherPages/Cart/CartMain/Cart";
 import CheckOutForm from "../OtherPages/Cart/CartMain/CheckOutForm";
+import SuccessPage from "../OtherPages/Cart/CartMain/successPage";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,14 @@ const router = createBrowserRouter([
       {
           path: "/cart",
           element:<PrivateRoutes><Cart></Cart></PrivateRoutes>
+      },
+      {
+          path:"payment/success/:tranId",
+          element: <SuccessPage></SuccessPage>
+      },
+      {
+          path: "payment/fail",
+          element: <div className="text-center py-20 text-red-500">Payment Failed! Try Again.</div>
       },
       {
         path: "/blogs",

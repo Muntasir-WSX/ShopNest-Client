@@ -11,6 +11,9 @@ export const CartProvider = ({ children }) => {
     const [cartLoading, setCartLoading] = useState(true);
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
+    const clearCart = useCallback(() => {
+        setCart([]); 
+    }, []);
     const fetchCart = useCallback(async () => {
         if (!user?.email) return;
         try {
@@ -95,7 +98,7 @@ export const CartProvider = ({ children }) => {
 
     return (
         <CartContext.Provider value={{
-            cart, cartLoading, addToCart, removeFromCart, updateQuantity,
+            cart, cartLoading, addToCart, removeFromCart, clearCart, updateQuantity,
             subTotal, shippingCharge, totalAmount, refetch: fetchCart
         }}>
             {children}
