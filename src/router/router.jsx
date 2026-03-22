@@ -15,6 +15,7 @@ import Wishlist from "../OtherPages/ShopMain/Wishlist/Wishlist";
 import Cart from "../OtherPages/Cart/CartMain/Cart";
 import CheckOutForm from "../OtherPages/Cart/CartMain/CheckOutForm";
 import SuccessPage from "../OtherPages/Cart/CartMain/successPage";
+import TrackingOrder from "../OtherPages/Tracking/TrackingOrder";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path:"/wishlist",
         element: <PrivateRoutes><Wishlist></Wishlist></PrivateRoutes>
+      },
+      {
+          path:"/track",
+          element: <PrivateRoutes><TrackingOrder></TrackingOrder></PrivateRoutes>
       },
       {
           path:"checkoutform",

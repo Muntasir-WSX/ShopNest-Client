@@ -15,7 +15,7 @@ import {
 } from 'react-icons/hi';
 import NavLogo from './Logo/NavLogo';
 import useAuth from '../Context/UseAuth';
-import { LogOut, Settings } from 'lucide-react';
+import { LogOut, PackageSearch, Settings, Train, TrainTrackIcon } from 'lucide-react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,6 +23,8 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Home', path: '/', icon: <HiOutlineHome /> },
     { name: 'Shop', path: '/shop', icon: <HiOutlineShoppingCart /> },
+    { name: 'Track Order', path: '/track', icon: <PackageSearch/> },
+
     { name: 'Blogs', path: '/blogs', icon: <HiOutlineBookOpen /> },
     { name: 'FAQ', path: '/faq', icon: <HiOutlineQuestionMarkCircle /> },
     { name: 'About Us', path: '/about', icon: <HiOutlineInformationCircle /> },

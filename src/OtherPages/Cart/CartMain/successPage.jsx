@@ -17,14 +17,7 @@ const SuccessPage = () => {
                 .then(res => {
                     if (res.data.acknowledged) {
                     clearCart();
-                }
-
-
-
-
-
-
-                
+                }   
             })
             .catch(err => console.error("Error clearing cart:", err));
     }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CartPayment = () => {
+const UserProfile = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const CartPayment = () => {
     );
 };
 
-export default CartPayment;
+export default UserProfile;

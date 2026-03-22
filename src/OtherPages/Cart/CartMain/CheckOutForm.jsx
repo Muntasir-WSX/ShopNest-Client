@@ -5,7 +5,7 @@ import Branding from '../../../Shared Components/Branding/Branding';
 import Newsletter from '../../../HomeComponents/newsLetter';
 
 const CheckOutForm = () => {
-    const { totalAmount, subTotal, shippingCharge } = useCart();
+    const { cart, totalAmount, subTotal, shippingCharge } = useCart();
     const [locations, setLocations] = useState([]);
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -23,10 +23,10 @@ const CheckOutForm = () => {
         totalAmount,
         subTotal,
         shippingCharge,
+        cartItems: cart,
         orderDate: new Date().toISOString(),
     };
 
-    // ১. সার্ভারে অর্ডার রিকোয়েস্ট পাঠানো
     try {
         const response = await fetch('http://localhost:5000/order', {
             method: 'POST',
@@ -49,8 +49,6 @@ const CheckOutForm = () => {
     }
 };
 
-
-    
 
     return (
         <div className="bg-gray-50 min-h-screen py-10 gap-2 px-4 sm:px-10">

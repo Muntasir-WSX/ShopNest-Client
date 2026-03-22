@@ -58,7 +58,7 @@ export const CartProvider = ({ children }) => {
                 orderQuantity: product.quantity || 1
             });
             
-            toast.success(`${product.name} added to cart!`);
+            // toast.success(`${product.name} added to cart!`);
             fetchCart(); 
             return true;
         }
