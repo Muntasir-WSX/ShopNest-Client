@@ -128,7 +128,7 @@ const TrackingOrder = () => {
                     </div>
                   ))}
                   {/* Connecting Line */}
-                  <div className="absolute top-5 left-0 w-full h-1 bg-gray-100 -z-0">
+                  <div className="absolute top-5 left-0 w-full h-1 bg-gray-100 z-0">
                     <motion.div
                       initial={{ width: 0 }}
                       animate={{
