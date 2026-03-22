@@ -19,6 +19,7 @@ import TrackingOrder from "../OtherPages/Tracking/TrackingOrder";
 
 import PersonalInfo from "../OtherPages/UserProfile/PersonalInfo";
 import UserProfile from "../OtherPages/UserProfile/UserProfile";
+import MyOrder from "../OtherPages/UserProfile/MyOrder";
 
 const router = createBrowserRouter([
   {
@@ -78,10 +79,7 @@ const router = createBrowserRouter([
         path: "/about",
         element: <AboutUs />
       },
-    ],
-  },
-
- {
+       {
     path: "profile", 
     element: <PrivateRoutes><UserProfile /></PrivateRoutes>, 
     children: [
@@ -93,16 +91,20 @@ const router = createBrowserRouter([
             path: "info", 
             element: <PersonalInfo />
         },
-        // {
-        //     path: "my-orders", 
-        //     element: <MyOrders /> 
-        // },
+        {
+            path: "my-orders", 
+            element: <MyOrder /> 
+        },
         // {
         //     path: "address", 
         //     element: <ManageAddress /> 
         // }
     ]
 },
+    ],
+  },
+
+
   {
     path: "/signin",
     element: <Signin />

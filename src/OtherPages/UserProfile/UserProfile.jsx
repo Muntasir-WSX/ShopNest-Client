@@ -10,8 +10,7 @@ const UserProfile = () => {
 
     const menuItems = [
         { name: "Information", path: "/profile/Info", icon: <User size={20}/> },
-        { name: "My Orders", path: "/my-orders", icon: <ShoppingBag size={20}/> },
-        { name: "Manage Address", path: "/my-account", icon: <MapPin size={20}/> },
+        { name: "My Orders", path: "/profile/my-orders", icon: <ShoppingBag size={20}/> },
     ];
 
     // Responsive Style Logic
