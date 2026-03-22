@@ -18,37 +18,42 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    // Helper to safely manage auth loading for each async method
+    const withAuthLoading = async (action) => {
+        setLoading(true);
+        try {
+            return await action();
+        } finally {
+            setLoading(false);
+        }
+    };
+
     // new user sign up function
     const createUser = (email, password) => {
-        setLoading(true);
-        return createUserWithEmailAndPassword(auth, email, password);
+        return withAuthLoading(() => createUserWithEmailAndPassword(auth, email, password));
     };
 
     // user update function
     const updateUserProfile = (name, photo) => {
-        setLoading(true);
-        return updateProfile(auth.currentUser, {
-            displayName: name, 
+        return withAuthLoading(() => updateProfile(auth.currentUser, {
+            displayName: name,
             photoURL: photo
-        });
+        }));
     };
 
-    // google sign in function
+    // user login function
     const userLogin = (email, password) => {
-        setLoading(true);
-        return signInWithEmailAndPassword(auth, email, password);
+        return withAuthLoading(() => signInWithEmailAndPassword(auth, email, password));
     };
 
     // google login function
     const googleLogin = () => {
-        setLoading(true);
-        return signInWithPopup(auth, googleProvider);
+        return withAuthLoading(() => signInWithPopup(auth, googleProvider));
     };
 
     // logout function
     const logOut = () => {
-        setLoading(true);
-        return signOut(auth);
+        return withAuthLoading(() => signOut(auth));
     };
 
     // onAuthStateChanged for login state tracking

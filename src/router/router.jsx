@@ -17,6 +17,9 @@ import CheckOutForm from "../OtherPages/Cart/CartMain/CheckOutForm";
 import SuccessPage from "../OtherPages/Cart/CartMain/successPage";
 import TrackingOrder from "../OtherPages/Tracking/TrackingOrder";
 
+import PersonalInfo from "../OtherPages/UserProfile/PersonalInfo";
+import UserProfile from "../OtherPages/UserProfile/UserProfile";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -77,6 +80,29 @@ const router = createBrowserRouter([
       },
     ],
   },
+
+ {
+    path: "profile", 
+    element: <PrivateRoutes><UserProfile /></PrivateRoutes>, 
+    children: [
+        {
+            index: true, 
+            element: <PersonalInfo />
+        },
+        {
+            path: "info", 
+            element: <PersonalInfo />
+        },
+        // {
+        //     path: "my-orders", 
+        //     element: <MyOrders /> 
+        // },
+        // {
+        //     path: "address", 
+        //     element: <ManageAddress /> 
+        // }
+    ]
+},
   {
     path: "/signin",
     element: <Signin />
