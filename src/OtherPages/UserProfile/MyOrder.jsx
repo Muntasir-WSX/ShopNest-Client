@@ -3,14 +3,14 @@ import useAuth from '../../Context/UseAuth';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { Package, Download, X } from 'lucide-react';
 import Swal from 'sweetalert2';
-import Invoice from './Invoice'; // আপনার আলাদা ইনভয়েস কম্পোনেন্ট
+import Invoice from './Invoice';
 
 const MyOrder = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [selectedOrder, setSelectedOrder] = useState(null); // মডালের জন্য স্টেট
+    const [selectedOrder, setSelectedOrder] = useState(null); 
 
     const fetchOrders = async () => {
         try {
@@ -26,14 +26,11 @@ const MyOrder = () => {
     useEffect(() => {
         if (user?.email) fetchOrders();
     }, [user?.email]);
-
-    // --- Cancel Order Logic ---
     const handleCancelOrder = (id) => {
         Swal.fire({
             title: "Are you sure?",
             text: "You want to cancel this order?",
             icon: "warning",
-            // শপ-নেস্ট থিম কালার অনুযায়ী বাটন কালার
             showCancelButton: true,
             confirmButtonColor: "#EF4444", 
             cancelButtonColor: "#059669",
@@ -52,8 +49,6 @@ const MyOrder = () => {
             }
         });
     };
-
-    // --- Open Invoice Modal ---
     const handleOpenInvoice = (order) => {
         setSelectedOrder(order);
     };
@@ -63,20 +58,15 @@ const MyOrder = () => {
     return (
         <div className="space-y-6 relative min-h-screen pb-20">
             <h2 className="text-2xl font-bold text-gray-800 px-2">Orders ({orders.length})</h2>
-
-            {/* --- Invoice Modal Overlay --- */}
             {selectedOrder && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+                <div className="fixed inset-0 z-100 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
                     <div className="bg-white rounded-3xl w-full max-w-5xl max-h-[90vh] overflow-y-auto relative shadow-2xl animate-in fade-in zoom-in duration-300">
-                        {/* Close Button */}
                         <button 
                             onClick={() => setSelectedOrder(null)}
                             className="absolute top-5 right-5 p-2 bg-gray-100 hover:bg-red-50 hover:text-red-500 rounded-full transition-all z-20"
                         >
                             <X size={20} />
                         </button>
-                        
-                        {/* Separate Invoice Component */}
                         <Invoice order={selectedOrder} />
                     </div>
                 </div>
@@ -91,8 +81,6 @@ const MyOrder = () => {
                 <div className="space-y-8">
                     {orders.map((order) => (
                         <div key={order._id} className={`border border-gray-100 rounded-3xl overflow-hidden shadow-sm bg-white transition-all ${order.status === 'Cancelled' ? 'grayscale-[0.5] opacity-80' : 'hover:shadow-md'}`}>
-                            
-                            {/* --- Order Summary Header (Yellow) --- */}
                             <div className={`p-5 grid grid-cols-2 md:grid-cols-4 gap-4 ${order.status === 'Cancelled' ? 'bg-gray-200 text-gray-600' : 'bg-[#FBBF24] text-gray-800'}`}>
                                 <div>
                                     <p className="text-[10px] uppercase font-bold opacity-70 tracking-wider">Order ID</p>
@@ -111,8 +99,6 @@ const MyOrder = () => {
                                     <p className="font-bold">{new Date(order.orderDate).toLocaleDateString('en-GB')}</p>
                                 </div>
                             </div>
-
-                            {/* --- Product List --- */}
                             <div className="p-6 space-y-4">
                                 {order.cartItems?.map((item, idx) => (
                                     <div key={idx} className="flex items-center gap-4 py-3 border-b border-gray-50 last:border-0">
@@ -127,8 +113,6 @@ const MyOrder = () => {
                                     </div>
                                 ))}
                             </div>
-
-                            {/* --- Action Bar Footer --- */}
                             <div className="px-6 py-5 bg-gray-50/50 flex flex-wrap justify-between items-center border-t border-gray-100 gap-4">
                                 <div className="flex items-center gap-3">
                                     <span className={`px-4 py-1.5 rounded-full text-[11px] font-bold uppercase border tracking-tight ${

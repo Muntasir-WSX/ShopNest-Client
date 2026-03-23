@@ -12,8 +12,6 @@ const UserProfile = () => {
         { name: "Information", path: "/profile/Info", icon: <User size={20}/> },
         { name: "My Orders", path: "/profile/my-orders", icon: <ShoppingBag size={20}/> },
     ];
-
-    // Responsive Style Logic
     const sidebarBtnStyle = (path) => `flex items-center gap-3 px-6 py-3 rounded-xl font-medium transition-all whitespace-nowrap ${
         pathname === path 
         ? "bg-[#059669] text-white shadow-lg" 
@@ -24,10 +22,7 @@ const UserProfile = () => {
         <div className="min-h-screen bg-gray-50">
             <div className="max-w-7xl mx-auto px-4 py-6 md:py-10">
                 <div className="flex flex-col lg:flex-row gap-8">
-                    
-                    {/* --- Sidebar Navigation --- */}
                     <div className="lg:w-1/4">
-                        {/* Desktop & Tablet: Fixed/Sticky Sidebar */}
                         <div className="hidden lg:block sticky top-24 bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
                             <h2 className="text-xl font-bold mb-6 px-2 text-gray-800">Settings</h2>
                             <nav className="space-y-2">
@@ -58,8 +53,6 @@ const UserProfile = () => {
                             </button>
                         </div>
                     </div>
-
-                    {/* --- Content Area --- */}
                     <div className="lg:w-3/4 w-full">
                         <div className="bg-white md:p-8 p-5 rounded-3xl shadow-sm border border-gray-100 min-h-[60vh]">
                             <Outlet />

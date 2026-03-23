@@ -13,7 +13,6 @@ const Invoice = ({ order }) => {
 
     return (
         <div className="p-4">
-            {/* Action Buttons */}
             <div className="flex justify-end gap-4 mb-6 no-print">
                 <button 
                     onClick={() => handlePrint()} 
@@ -23,8 +22,6 @@ const Invoice = ({ order }) => {
                 </button>
             </div>
             <div ref={componentRef} className="bg-white p-10 border border-gray-100 max-w-4xl mx-auto shadow-sm print:shadow-none print:border-none">
-                
-                {/* Header: Logo & Info */}
                 <div className="flex justify-between items-start border-b-2 border-gray-50 pb-8">
                     <div>
                         <div className="mb-2">
@@ -48,8 +45,6 @@ const Invoice = ({ order }) => {
                         <p className="text-gray-500 text-xs mt-4">Date: {new Date(order.orderDate).toLocaleDateString()}</p>
                     </div>
                 </div>
-
-                {/* Billing Details */}
                 <div className="grid grid-cols-2 gap-8 py-10">
                     <div>
                         <h3 className="text-xs uppercase font-bold text-gray-400 mb-2">Bill To:</h3>
@@ -63,8 +58,6 @@ const Invoice = ({ order }) => {
                         <p className="text-emerald-600 font-bold uppercase text-xs mt-1">Status: Paid</p>
                     </div>
                 </div>
-
-                {/* Table */}
                 <table className="w-full text-left border-collapse">
                     <thead>
                         <tr className="bg-gray-50">
@@ -88,8 +81,6 @@ const Invoice = ({ order }) => {
                         ))}
                     </tbody>
                 </table>
-
-                {/* Calculation */}
                 <div className="flex justify-end mt-8">
                     <div className="w-full max-w-xs space-y-3">
                         <div className="flex justify-between text-gray-600">
@@ -106,8 +97,6 @@ const Invoice = ({ order }) => {
                         </div>
                     </div>
                 </div>
-
-                {/* Footer Message */}
                 <div className="mt-20 pt-10 border-t border-gray-100 text-center">
                     <p className="text-gray-400 text-sm italic">Thank you for shopping with ShopNest! Your smart grocery partner.</p>
                 </div>

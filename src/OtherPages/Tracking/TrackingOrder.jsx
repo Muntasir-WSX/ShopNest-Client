@@ -11,20 +11,29 @@ const TrackingOrder = () => {
   const axiosSecure = useAxiosSecure();
 
   const handleTrack = () => {
-    if (!tranId.trim()) return toast.error("Please enter a Transaction ID");
+  const cleanId = tranId.trim();
+  
+  if (!cleanId) {
+    return toast.error("Please enter a Transaction ID");
+  }
 
     setLoading(true);
-    axiosSecure
-      .get(`/orders/track/${tranId.trim()}`)
-      .then((res) => {
+   axiosSecure
+    .get(`/orders/track/${cleanId}`) 
+    .then((res) => {
+      if (res.data) {
         setOrder(res.data);
         toast.success("Order Found!");
-        setLoading(false);
-      })
-      .catch((err) => {
-        toast.error("Order not found or Invalid ID");
-        setLoading(false);
-      });
+      } else {
+        toast.error("Order not found!");
+      }
+      setLoading(false);
+    })
+    .catch((err) => {
+      console.error(err);
+      toast.error("Invalid ID or Order not found");
+      setLoading(false);
+    });
   };
 
   const statusSteps = ["Pending", "Accepted", "Processing", "On the Way", "Delivered"];

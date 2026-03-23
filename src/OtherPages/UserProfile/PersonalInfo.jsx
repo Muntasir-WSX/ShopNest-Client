@@ -59,7 +59,6 @@ const PersonalInfo = () => {
 
     return (
         <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
-            {/* Profile Header */}
             <div className="relative w-32 h-32 mx-auto mb-10">
                 <img 
                     src={user?.photoURL || "https://i.ibb.co/5GzXkwq/user.png"} 
