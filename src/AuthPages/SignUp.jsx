@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'; // useEffect যোগ করা হয়েছে
+import React, { useEffect } from 'react'; 
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc'; 
@@ -9,8 +9,6 @@ import useAuth from '../Context/UseAuth';
 const SignUp = () => {
     const { createUser, updateUserProfile, googleLogin, user } = useAuth();
     const navigate = useNavigate();
-    
-    // ✅ ইউজার থাকলে হোমে পাঠিয়ে দাও
     useEffect(() => {
         if (user) {
             navigate('/');
@@ -19,35 +17,64 @@ const SignUp = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const onSubmit = async (data) => {
-        const fullName = `${data.firstName} ${data.lastName}`;
-        const defaultPhoto = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+   const onSubmit = async (data) => {
+    const fullName = `${data.firstName} ${data.lastName}`;
+    const defaultPhoto = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
 
-        try {
-            await createUser(data.email, data.password);
-            await updateUserProfile(fullName, defaultPhoto);
-            toast.success("Account created successfully!");
-            // navigate('/') এখানে দরকার নেই কারণ useEffect হ্যান্ডেল করবে
-        } catch (error) {
-            console.log("Error Code:", error.code);
-            if (error.code === 'auth/email-already-in-use') {
-                toast.error("This email is already in use!");
-            } else if (error.code === 'auth/weak-password') {
-                toast.error("Password must be at least 6 characters long.");
-            } else {
-                toast.error("Something went wrong, please try again.");
+    try {
+        const result = await createUser(data.email, data.password);
+        await updateUserProfile(fullName, defaultPhoto);
+        const userData = {
+            name: fullName,
+            email: data.email,
+            photo: defaultPhoto,
+        };
+
+        fetch(`http://localhost:5000/users/${data.email}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.upsertedCount > 0 || data.modifiedCount > 0 || data.matchedCount > 0){
+                toast.success("Account created and saved to database!");
             }
-        }
-    };
+        });
 
-    const handleGoogleSignUp = async () => {
-        try {
-            await googleLogin();
+    } catch (error) {
+        toast.error(error.message);
+    }
+};
+
+const handleGoogleSignUp = async () => {
+    try {
+        const result = await googleLogin();
+        const user = result.user;
+        const userData = {
+            name: user.displayName,
+            email: user.email,
+            photo: user.photoURL,
+        };
+
+        fetch(`http://localhost:5000/users/${user.email}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        })
+        .then(res => res.json())
+        .then(() => {
             toast.success("Signed up with Google!");
-        } catch (error) {
-            toast.error(error.message);
-        }
-    };
+        });
+
+    } catch (error) {
+        toast.error(error.message);
+    }
+};
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4 font-sans">
