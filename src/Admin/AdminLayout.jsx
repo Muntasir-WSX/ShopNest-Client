@@ -9,9 +9,10 @@ import {
   HiOutlineHome,
   HiMenuAlt2
 } from 'react-icons/hi';
-import { LogOut, X } from 'lucide-react';
+import { LogOut, Mail } from 'lucide-react';
 import useAuth from '../Context/UseAuth';
 import FooterLogo from '../Shared Components/Logo/FooterLogo';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const AdminLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -23,6 +24,7 @@ const AdminLayout = () => {
     { name: 'Post New Product', path: '/dashboard/add-product', icon: <HiOutlinePlusCircle /> },
     { name: 'All Products', path: '/dashboard/all-products', icon: <HiOutlineCube /> },
     { name: 'Users', path: '/dashboard/users', icon: <HiOutlineUsers /> },
+    { name: 'Complain Box', path: '/dashboard/complain', icon: <Mail /> },
   ];
 
   const SidebarContent = () => (
@@ -54,7 +56,7 @@ const AdminLayout = () => {
             className={({ isActive }) =>
               `flex items-center gap-3 px-4 py-3.5 rounded-2xl text-sm font-bold transition-all duration-300 ${
                 isActive 
-                ? 'bg-[#059669] text-white shadow-lg shadow-green-100 translate-x-1' 
+                ? 'bg-[#059669] text-white shadow-lg translate-x-1' 
                 : 'text-gray-500 hover:bg-gray-50 hover:text-gray-900'
               }`
             }
@@ -86,41 +88,45 @@ const AdminLayout = () => {
   );
 
   return (
-    <div className="min-h-screen bg-[#F9FAFB] flex font-sans">
+    <div className="min-h-screen bg-[#F9FAFB] flex font-sans overflow-hidden">
       
-      {/* Desktop Sidebar (Fixed) */}
-      <aside className="hidden lg:block w-72 sticky top-0 h-screen shadow-sm">
+      {/* Desktop Sidebar */}
+      <aside className="hidden lg:block w-72 sticky top-0 h-screen">
         <SidebarContent />
       </aside>
-
-      {/* Mobile Sidebar Overlay */}
-      {isSidebarOpen && (
-        <div 
-          className="fixed inset-0 bg-black/40 z-110 lg:hidden backdrop-blur-sm"
-          onClick={() => setIsSidebarOpen(false)}
-        >
-          <div 
-            className="w-72 h-full animate-in slide-in-from-left duration-300"
-            onClick={e => e.stopPropagation()}
-          >
-            <SidebarContent />
-            <button 
-              className="absolute top-5 -right-12 p-2 bg-white rounded-full text-gray-800 shadow-xl"
+      <AnimatePresence>
+        {isSidebarOpen && (
+          <>
+            {/* Backdrop Overlay */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               onClick={() => setIsSidebarOpen(false)}
+              className="fixed inset-0 bg-black/50 z-110 lg:hidden backdrop-blur-sm"
+            />
+
+            {/* Sidebar Content */}
+            <motion.div 
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed top-0 left-0 w-72 h-full z-120 lg:hidden"
             >
-              <X size={20} />
-            </button>
-          </div>
-        </div>
-      )}
+              <SidebarContent />
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
 
       {/* Main Content Area */}
       <main className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
         
-        {/* Dashboard Header (Mobile Toggle) */}
+        {/* Header */}
         <header className="bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between lg:justify-end shrink-0">
           <button 
-            className="lg:hidden p-2 hover:bg-gray-100 rounded-xl transition"
+            className="lg:hidden p-2 hover:bg-gray-100 rounded-xl transition active:scale-90"
             onClick={() => setIsSidebarOpen(true)}
           >
             <HiMenuAlt2 className="text-2xl text-gray-600" />
@@ -135,17 +141,19 @@ const AdminLayout = () => {
           </div>
         </header>
 
-        {/* Dynamic Page Content */}
-        <div className="flex-1 overflow-y-auto p-4 md:p-8">
+        {/* Content Page */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="flex-1 overflow-y-auto p-4 md:p-8"
+        >
             <div className="max-w-6xl mx-auto">
                 <Outlet />
             </div>
-        </div>
+        </motion.div>
       </main>
     </div>
   );
 };
-
-
 
 export default AdminLayout;
