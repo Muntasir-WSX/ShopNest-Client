@@ -50,7 +50,7 @@ const ErrorPage = () => {
                     
                     <Link 
                         to="/"
-                        className="flex items-center gap-2 px-8 py-3 bg-[#059669] text-white rounded-2xl font-bold shadow-lg shadow-green-200 hover:bg-[#047857] transition-all active:scale-95 w-full sm:w-auto justify-center"
+                        className="px-5 py-2 md:px-8 md:py-3 bg-[#059669] hover:bg-[#047857] transition-all text-white rounded-lg font-bold flex items-center gap-2 text-sm md:text-base"
                     >
                         <HiOutlineHome size={20} />
                         Back to Home
