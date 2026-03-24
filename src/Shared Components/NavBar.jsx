@@ -45,7 +45,7 @@ const Navbar = () => {
   const allLinks = [...navLinks, ...adminLinks, ...otherLinks];
 
   return (
-    <nav className="w-full shadow-sm font-sans sticky top-0 z-[100] bg-white">
+    <nav className="w-full shadow-sm font-sans sticky top-0 z-100 bg-white">
       {/* 1. Top Bar */}
       <div className="bg-[#FBBF24] py-1 text-[10px] md:text-xs text-gray-800 font-medium">
         <div className="container mx-auto px-4 flex justify-between items-center">
@@ -130,7 +130,7 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Drawer */}
-      <div className={`fixed inset-0 bg-black/60 z-[110] transition-opacity duration-300 lg:hidden ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={() => setIsOpen(false)}>
+      <div className={`fixed inset-0 bg-black/60 z-110 transition-opacity duration-300 lg:hidden ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={() => setIsOpen(false)}>
         <div className={`bg-white w-72 h-full shadow-2xl transition-transform duration-300 flex flex-col ${isOpen ? 'translate-x-0' : '-translate-x-full'}`} onClick={e => e.stopPropagation()}>
           <div className="p-5 bg-[#059669] text-white flex justify-between items-center">
             <NavLogo />
