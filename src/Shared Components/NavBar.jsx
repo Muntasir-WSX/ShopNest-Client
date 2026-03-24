@@ -22,27 +22,28 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, logOut } = useAuth();
   const [isAdmin] = useAdmin(); 
-
-  // Basic Links
-  const navLinks = [
+  const commonLinks = [
     { name: 'Home', path: '/', icon: <HiOutlineHome /> },
     { name: 'Shop', path: '/shop', icon: <HiOutlineShoppingCart /> },
     { name: 'Track Order', path: '/track', icon: <PackageSearch size={18}/> },
   ];
 
-  // Logic to add Dashboard if Admin
-  const adminLinks = (user && isAdmin) ? [
-    { name: 'Dashboard', path: '/dashboard', icon: <HiOutlineViewGrid /> }
-  ] : [];
+  // only for admin
+  const adminDashboardLink = { name: 'Dashboard', path: '/dashboard', icon: <HiOutlineViewGrid /> };
 
+  // user link
   const otherLinks = [
     { name: 'Blogs', path: '/blogs', icon: <HiOutlineBookOpen /> },
     { name: 'FAQ', path: '/faq', icon: <HiOutlineQuestionMarkCircle /> },
     { name: 'About Us', path: '/about', icon: <HiOutlineInformationCircle /> },
   ];
 
-  // Combine all links correctly
-  const allLinks = [...navLinks, ...adminLinks, ...otherLinks];
+  let finalNavLinks = [];
+  if (user && isAdmin) {
+    finalNavLinks = [...commonLinks, adminDashboardLink];
+  } else {
+    finalNavLinks = [...commonLinks, ...otherLinks];
+  }
 
   return (
     <nav className="w-full shadow-sm font-sans sticky top-0 z-100 bg-white">
@@ -70,7 +71,7 @@ const Navbar = () => {
 
           {/* Desktop Navigation Links */}
           <ul className="hidden lg:flex items-center gap-6 ml-6">
-            {allLinks.map(link => (
+            {finalNavLinks.map(link => (
               <li key={link.name}>
                 <NavLink 
                   to={link.path}
@@ -141,7 +142,7 @@ const Navbar = () => {
           
           <div className="p-4 flex flex-col gap-2 overflow-y-auto">
             <p className="px-3 text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Navigation</p>
-            {allLinks.map(link => (
+            {finalNavLinks.map(link => (
               <NavLink 
                 key={link.name} 
                 to={link.path} 
@@ -162,7 +163,7 @@ const Navbar = () => {
             {user ? (
                <>
                 <Link to="/profile" onClick={() => setIsOpen(false)} className="flex items-center gap-3 p-3 mb-3 bg-white rounded-xl border border-gray-100">
-                  <img src={user?.photoURL} className="w-8 h-8 rounded-full" alt="" />
+                  <img src={user?.photoURL || "https://i.ibb.co/mJR9Hxc/user-avatar.png"} className="w-8 h-8 rounded-full" alt="" />
                   <span className="text-sm font-bold text-gray-700">My Profile</span>
                 </Link>
                 <button onClick={() => { logOut(); setIsOpen(false); }} className="flex items-center justify-center gap-2 w-full py-3 bg-red-50 text-red-600 rounded-xl font-bold border border-red-100">
