@@ -79,6 +79,15 @@ const router = createBrowserRouter([
         path: "/about",
         element: <AboutUs />
       },
+//       {
+//   path: "dashboard",
+//   element: <AdminRoute><AdminLayout /></AdminRoute>, 
+//   children: [
+//      { index: true, element: <AdminAnalytics /> },
+//      { path: "manage-orders", element: <ManageOrders /> },
+//      // বাকি রাউটগুলো...
+//   ]
+// }
        {
     path: "profile", 
     element: <PrivateRoutes><UserProfile /></PrivateRoutes>, 
