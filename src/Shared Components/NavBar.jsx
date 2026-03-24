@@ -22,14 +22,18 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, logOut } = useAuth();
   const [isAdmin] = useAdmin(); 
+
+  // Basic Links
   const navLinks = [
     { name: 'Home', path: '/', icon: <HiOutlineHome /> },
     { name: 'Shop', path: '/shop', icon: <HiOutlineShoppingCart /> },
     { name: 'Track Order', path: '/track', icon: <PackageSearch size={18}/> },
   ];
-  if (user && isAdmin) {
-    navLinks.push({ name: 'Dashboard', path: '/dashboard', icon: <HiOutlineViewGrid /> });
-  }
+
+  // Logic to add Dashboard if Admin
+  const adminLinks = (user && isAdmin) ? [
+    { name: 'Dashboard', path: '/dashboard', icon: <HiOutlineViewGrid /> }
+  ] : [];
 
   const otherLinks = [
     { name: 'Blogs', path: '/blogs', icon: <HiOutlineBookOpen /> },
@@ -37,10 +41,11 @@ const Navbar = () => {
     { name: 'About Us', path: '/about', icon: <HiOutlineInformationCircle /> },
   ];
 
-  const allLinks = [...navLinks, ...otherLinks];
+  // Combine all links correctly
+  const allLinks = [...navLinks, ...adminLinks, ...otherLinks];
 
   return (
-    <nav className="w-full shadow-sm font-sans sticky top-0 z-100 bg-white">
+    <nav className="w-full shadow-sm font-sans sticky top-0 z-[100] bg-white">
       {/* 1. Top Bar */}
       <div className="bg-[#FBBF24] py-1 text-[10px] md:text-xs text-gray-800 font-medium">
         <div className="container mx-auto px-4 flex justify-between items-center">
@@ -93,7 +98,6 @@ const Navbar = () => {
               <HiOutlineShoppingBag className="text-2xl" />
             </Link>
 
-            {/* Profile Section (No Dropdown for Admin/User) */}
             {user ? (
               <div className="flex items-center gap-3">
                 <Link to="/profile" title="My Profile">
@@ -106,7 +110,6 @@ const Navbar = () => {
                       <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-[#059669] rounded-full"></div>
                    </div>
                 </Link>
-                {/* Logout Button directly on Navbar for ease */}
                 <button onClick={logOut} className="text-white/80 hover:text-red-300 transition-colors hidden md:block" title="Logout">
                   <LogOut size={20} />
                 </button>
@@ -126,8 +129,8 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Drawer (Same Logic) */}
-      <div className={`fixed inset-0 bg-black/60 z-101 transition-opacity duration-300 lg:hidden ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={() => setIsOpen(false)}>
+      {/* Mobile Drawer */}
+      <div className={`fixed inset-0 bg-black/60 z-[110] transition-opacity duration-300 lg:hidden ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={() => setIsOpen(false)}>
         <div className={`bg-white w-72 h-full shadow-2xl transition-transform duration-300 flex flex-col ${isOpen ? 'translate-x-0' : '-translate-x-full'}`} onClick={e => e.stopPropagation()}>
           <div className="p-5 bg-[#059669] text-white flex justify-between items-center">
             <NavLogo />
@@ -156,20 +159,20 @@ const Navbar = () => {
           </div>
 
           <div className="mt-auto p-4 border-t border-gray-100 bg-gray-50">
-            {user && (
-               <Link to="/profile" onClick={() => setIsOpen(false)} className="flex items-center gap-3 p-3 mb-3 bg-white rounded-xl border border-gray-100">
+            {user ? (
+               <>
+                <Link to="/profile" onClick={() => setIsOpen(false)} className="flex items-center gap-3 p-3 mb-3 bg-white rounded-xl border border-gray-100">
                   <img src={user?.photoURL} className="w-8 h-8 rounded-full" alt="" />
                   <span className="text-sm font-bold text-gray-700">My Profile</span>
-               </Link>
-            )}
-            {!user ? (
+                </Link>
+                <button onClick={() => { logOut(); setIsOpen(false); }} className="flex items-center justify-center gap-2 w-full py-3 bg-red-50 text-red-600 rounded-xl font-bold border border-red-100">
+                  <LogOut size={18} /> Logout
+                </button>
+               </>
+            ) : (
                <Link to="/signin" onClick={() => setIsOpen(false)} className="flex items-center justify-center gap-2 w-full py-3 bg-[#059669] text-white rounded-xl font-bold shadow-lg">
                  <HiOutlineUser className="text-lg" /> Login / Register
                </Link>
-            ) : (
-              <button onClick={() => { logOut(); setIsOpen(false); }} className="flex items-center justify-center gap-2 w-full py-3 bg-red-50 text-red-600 rounded-xl font-bold border border-red-100">
-                <LogOut size={18} /> Logout
-              </button>
             )}
           </div>
         </div>

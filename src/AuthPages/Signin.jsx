@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react'; // useEffect যোগ করা হয়েছে
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -6,23 +6,28 @@ import { FcGoogle } from 'react-icons/fc';
 import FooterLogo from '../Shared Components/Logo/FooterLogo';
 import useAuth from '../Context/UseAuth';
 
-
 const Signin = () => {
-    const { userLogin, googleLogin } = useAuth();
+    const { userLogin, googleLogin, user, loading } = useAuth();
     const navigate = useNavigate();
-const location = useLocation();
-const from = location.state?.from?.pathname || "/";
-navigate(from, { replace: true });
-  
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
+    // ✅ FIX: navigate সরাসরি না লিখে useEffect-এর ভেতর দিতে হবে
+    useEffect(() => {
+        if (user) {
+            navigate(from, { replace: true });
+        }
+    }, [user, from, navigate]);
+
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = async (data) => {
         try {
             await userLogin(data.email, data.password);
             toast.success("Successfully Signed In!");
-            navigate('/'); 
+            // navigate এখানেও কাজ করবে কারণ এটা ইভেন্ট হ্যান্ডলারের ভেতরে
         } catch (error) {
-            toast.error(error.message.split('/')[1].replace(')', ''));
+            toast.error(error.message.split('/')[1]?.replace(')', '') || "Login Failed");
             console.error(error);
         }
     };
@@ -31,16 +36,19 @@ navigate(from, { replace: true });
         try {
             await googleLogin();
             toast.success("Signed in with Google!");
-            navigate('/');
         } catch (error) {
             toast.error(error.message);
         }
     };
 
+    // লোডিং অবস্থায় থাকলে একটু ওয়েট করা ভালো
+    if (loading && !user) {
+        return <div className="h-screen flex items-center justify-center">Loading...</div>;
+    }
+
     return (
         <div className="h-screen flex items-center justify-center bg-gray-50 p-4 overflow-hidden">
             <div className="max-w-4xl w-full bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row h-full max-h-[580px]">
-                
                 {/* Left Side: Image Content */}
                 <div className="md:w-5/12 relative hidden md:block">
                     <img 

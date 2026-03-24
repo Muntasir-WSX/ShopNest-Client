@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react'; // useEffect যোগ করা হয়েছে
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc'; 
 import FooterLogo from '../Shared Components/Logo/FooterLogo';
-
 import toast from 'react-hot-toast'; 
 import useAuth from '../Context/UseAuth';
 
 const SignUp = () => {
-    const { createUser, updateUserProfile, googleLogin } = useAuth();
+    const { createUser, updateUserProfile, googleLogin, user } = useAuth();
     const navigate = useNavigate();
     
-    // React Hook Form initialization
+    // ✅ ইউজার থাকলে হোমে পাঠিয়ে দাও
+    useEffect(() => {
+        if (user) {
+            navigate('/');
+        }
+    }, [user, navigate]);
+
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = async (data) => {
@@ -19,29 +24,19 @@ const SignUp = () => {
         const defaultPhoto = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
 
         try {
-           
             await createUser(data.email, data.password);
-            
-          
             await updateUserProfile(fullName, defaultPhoto);
-            
             toast.success("Account created successfully!");
-            navigate('/'); 
+            // navigate('/') এখানে দরকার নেই কারণ useEffect হ্যান্ডেল করবে
         } catch (error) {
-          
-            // toast.error(error.message.split('/')[1].replace(')', ''));
-
-
             console.log("Error Code:", error.code);
-    console.log("Error Message:", error.message);
-   
-    if (error.code === 'auth/email-already-in-use') {
-        toast.error("This email is already in use!");
-    } else if (error.code === 'auth/weak-password') {
-        toast.error("Password must be at least 6 characters long.");
-    } else {
-        toast.error("Something went wrong, please try again.");
-    }
+            if (error.code === 'auth/email-already-in-use') {
+                toast.error("This email is already in use!");
+            } else if (error.code === 'auth/weak-password') {
+                toast.error("Password must be at least 6 characters long.");
+            } else {
+                toast.error("Something went wrong, please try again.");
+            }
         }
     };
 
@@ -49,7 +44,6 @@ const SignUp = () => {
         try {
             await googleLogin();
             toast.success("Signed up with Google!");
-            navigate('/');
         } catch (error) {
             toast.error(error.message);
         }
@@ -77,7 +71,7 @@ const SignUp = () => {
                     </div>
                 </div>
 
-                {/* Left Side: Registration Form */}
+                {/* Left Side: Form */}
                 <div className="md:w-7/12 p-6 md:p-8 flex flex-col justify-center overflow-y-auto">
                     <div className="mb-4 transform scale-90 origin-left">
                        <FooterLogo />
