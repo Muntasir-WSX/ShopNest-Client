@@ -20,6 +20,8 @@ import TrackingOrder from "../OtherPages/Tracking/TrackingOrder";
 import PersonalInfo from "../OtherPages/UserProfile/PersonalInfo";
 import UserProfile from "../OtherPages/UserProfile/UserProfile";
 import MyOrder from "../OtherPages/UserProfile/MyOrder";
+import AdminLayout from "../Admin/AdminLayout";
+import AdminRoute from "../Routes/AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -79,15 +81,15 @@ const router = createBrowserRouter([
         path: "/about",
         element: <AboutUs />
       },
-//       {
-//   path: "dashboard",
-//   element: <AdminRoute><AdminLayout /></AdminRoute>, 
-//   children: [
-//      { index: true, element: <AdminAnalytics /> },
-//      { path: "manage-orders", element: <ManageOrders /> },
-//      // বাকি রাউটগুলো...
-//   ]
-// }
+      {
+  path: "dashboard",
+  element: <AdminRoute><AdminLayout /></AdminRoute>, 
+  children: [
+    //  { index: true, element: <AdminAnalytics /> },
+    //  { path: "manage-orders", element: <ManageOrders /> },
+    //  
+  ]
+},
        {
     path: "profile", 
     element: <PrivateRoutes><UserProfile /></PrivateRoutes>, 
