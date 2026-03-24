@@ -3,6 +3,8 @@ import toast from 'react-hot-toast';
 import { Camera } from 'lucide-react';
 import useAuth from '../../Context/UseAuth';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import Branding from '../../Shared Components/Branding/Branding';
+import Newsletter from '../../HomeComponents/newsLetter';
 
 const PersonalInfo = () => {
     const { user, updateUserProfile, loading: authLoading } = useAuth();
@@ -119,6 +121,15 @@ const PersonalInfo = () => {
                     {(loading || authLoading) ? <span className="loading loading-spinner"></span> : "Update Changes"}
                 </button>
             </form>
+            <div className='mt-15'>
+ <Branding></Branding>
+            </div>
+
+            <div className='mt-15'>
+ <Newsletter></Newsletter>
+            </div>
+           
+           
         </div>
     );
 };
