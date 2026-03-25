@@ -28,6 +28,7 @@ import PostProducts from "../Admin/PostProducts/PostProducts";
 import Newsletter from "../HomeComponents/newsLetter";
 import AllUsers from "../Admin/AllUsers/AllUsers";
 import AllProducts from "../Admin/AllProducts/AllProducts";
+import NewsLetterMessage from "../Admin/NewsLetterMessage/NewsLetterMessage";
 
 const router = createBrowserRouter([
   {
@@ -118,7 +119,7 @@ const router = createBrowserRouter([
      { path: "/dashboard/add-product", element: <PostProducts /> },
      { path: "/dashboard/all-products", element: <AllProducts /> },
      { path: "/dashboard/users", element: <AllUsers /> },
-     { path: "/dashboard/complain", element: <Newsletter /> },
+     { path: "/dashboard/complain", element: <NewsLetterMessage/> },
      
   ]
 },

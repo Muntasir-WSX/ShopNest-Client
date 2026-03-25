@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { ShieldCheck, User, Trash2 } from 'lucide-react';
 import Swal from 'sweetalert2';
+import Loader from '../../Shared Components/Loader/Loader';
 const AllUsers = () => {
     const axiosSecure = useAxiosSecure();
     const [users, setUsers] = useState([]);
@@ -46,7 +47,7 @@ const AllUsers = () => {
         });
     };
 
-    if (loading) return <div className="flex justify-center py-20"><span className="loading loading-spinner loading-lg text-emerald-600"></span></div>;
+    if (loading) return <div className="flex justify-center py-20"> <Loader></Loader></div>;
 
     return (
         <div className="p-6 bg-white rounded-3xl shadow-sm border border-gray-100">
