@@ -24,6 +24,10 @@ import AdminLayout from "../Admin/AdminLayout";
 import AdminRoute from "../Routes/AdminRoute";
 import Analytics from "../Admin/Analytics/Analytics";
 import ManageOrders from "../Admin/ManageOrders/ManageOrders";
+import PostProducts from "../Admin/PostProducts/PostProducts";
+import Newsletter from "../HomeComponents/newsLetter";
+import AllUsers from "../Admin/AllUsers/AllUsers";
+import AllProducts from "../Admin/AllProducts/AllProducts";
 
 const router = createBrowserRouter([
   {
@@ -111,10 +115,10 @@ const router = createBrowserRouter([
   children: [
      { index: true, element: <Analytics /> },
      { path: "/dashboard/manage-orders", element: <ManageOrders /> },
-     { path: "/dashboard/add-product", element: <ManageOrders /> },
-     { path: "/dashboard/all-products", element: <ManageOrders /> },
-     { path: "/dashboard/users", element: <ManageOrders /> },
-     { path: "/dashboard/complain", element: <ManageOrders /> },
+     { path: "/dashboard/add-product", element: <PostProducts /> },
+     { path: "/dashboard/all-products", element: <AllProducts /> },
+     { path: "/dashboard/users", element: <AllUsers /> },
+     { path: "/dashboard/complain", element: <Newsletter /> },
      
   ]
 },
