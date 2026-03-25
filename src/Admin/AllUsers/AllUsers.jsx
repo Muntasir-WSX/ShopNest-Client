@@ -93,7 +93,7 @@ const AllUsers = () => {
                                     {user.role !== 'admin' ? (
                                         <button 
                                             onClick={() => handleMakeAdmin(user)}
-                                            className="btn btn-ghost btn-sm text-emerald-600 hover:bg-emerald-50 gap-2"
+                                            className=" bg-[#059669] hover:bg-emerald-500 text-xs text-white flex p-2 transition-normal rounded-lg  "
                                             title="Make Admin"
                                         >
                                             <ShieldCheck size={18} /> Make Admin
