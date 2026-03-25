@@ -3,11 +3,15 @@ import { useForm } from 'react-hook-form';
 import { useCart } from '../../../Context/CartProvider';
 import Branding from '../../../Shared Components/Branding/Branding';
 import Newsletter from '../../../HomeComponents/newsLetter';
+import useAuth from '../../../Context/UseAuth';
+
 
 const CheckOutForm = () => {
     const { cart, totalAmount, subTotal, shippingCharge } = useCart();
     const [locations, setLocations] = useState([]);
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const { user } = useAuth();
+
 
     useEffect(() => {
         fetch('/ctgLocations.json')
@@ -121,17 +125,21 @@ const CheckOutForm = () => {
                                 {errors.phone && <span className="text-red-500 text-xs mt-1">{errors.phone.message}</span>}
                             </div>
                             <div>
-                                <label className="block text-sm font-bold text-gray-700 mb-2">Email Address *</label>
-                                <input 
-                                    {...register("email", { 
-                                        required: "Email is required",
-                                        pattern: { value: /^\S+@\S+$/i, message: "Invalid email address" }
-                                    })}
-                                    type="email" placeholder="mail@example.com" 
-                                    className={`w-full p-3 border rounded-xl outline-none transition-all ${errors.email ? 'border-red-500' : 'border-gray-200 focus:ring-2 focus:ring-[#059669]'}`} 
-                                />
-                                {errors.email && <span className="text-red-500 text-xs mt-1">{errors.email.message}</span>}
-                            </div>
+    <label className="block text-sm font-bold text-gray-700 mb-2">Email Address *</label>
+    <input 
+        {...register("email", { 
+            required: "Email is required",
+            pattern: { value: /^\S+@\S+$/i, message: "Invalid email address" }
+        })}
+        type="email" 
+        defaultValue={user?.email} 
+        readOnly 
+        className={`w-full p-3 border rounded-xl outline-none transition-all cursor-not-allowed bg-gray-50 text-gray-500 font-medium ${
+            errors.email ? 'border-red-500' : 'border-gray-200 focus:ring-2 focus:ring-[#059669]'
+        }`} 
+    />
+    {errors.email && <span className="text-red-500 text-xs mt-1">{errors.email.message}</span>}
+</div>
                         </div>
                     </form>
                 </div>
