@@ -61,9 +61,7 @@ const ShopLayout = () => {
                     <Branding />
                 </motion.div>
             </div>
-            <ProductChatBot product={testProduct
-                
-            } />
+            <ProductChatBot product={testProduct} />
         </div>
     );
 };
