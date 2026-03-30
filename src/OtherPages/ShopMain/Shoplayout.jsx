@@ -3,6 +3,7 @@ import SideBar from './SideBar';
 import ShopMain from './ShopMain'; 
 import Branding from '../../Shared Components/Branding/Branding';
 import { motion } from 'framer-motion'; 
+import ProductChatBot from './ProductChatBot';
 
 const ShopLayout = () => {
     const [filters, setFilters] = useState({
@@ -15,6 +16,13 @@ const ShopLayout = () => {
         animate: { opacity: 1, y: 0 },
         transition: { duration: 0.5, ease: "easeOut" }
     };
+
+    const testProduct = {
+    name: "Fresh Broccoli",
+    price: 300,
+    origin: "Bogura, BD",
+    desc: "Crispy and nutrient-rich organic broccoli harvested daily."
+};
 
     return (
         <div className="bg-gray-50/50 min-h-screen">
@@ -53,6 +61,9 @@ const ShopLayout = () => {
                     <Branding />
                 </motion.div>
             </div>
+            <ProductChatBot product={testProduct
+                
+            } />
         </div>
     );
 };
