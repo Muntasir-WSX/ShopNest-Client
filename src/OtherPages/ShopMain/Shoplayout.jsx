@@ -33,9 +33,6 @@ const ShopLayout = () => {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5 }}
                         className="lg:w-1/4 w-full"
-
-
-                        
                     >
                         <div className="lg:sticky lg:top-24 self-start">
                             <SideBar filters={filters} setFilters={setFilters} />
